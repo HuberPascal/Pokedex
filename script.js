@@ -1,4 +1,7 @@
-let pokemon = ['bulbasaur', 'ivysaur', 'venusaur', 'charmander']
+let pokemon = [
+    'bulbasaur', 'ivysaur', 'venusaur', 'squirtle', 'charmander', 'pikachu', 'jigglypuff', 'meowth', 'psyduck', 'machop', 'geodude', 'gyarados', 'lapras', 'eevee', 'snorlax', 'articuno', 'zapdos', 'moltres', 'moltres', 'chikorita', 'cyndaquil', 'totodile', 'togepi', 'mareep', 'typhlosion', 'feraligatr', 'lugia', 'ho-oh', 'treecko', 'torchic', 'mudkip', 'gardevoir', 'sceptile', 'blaziken', 'swampert', 'mightyena', 'zigzagoon', 'linoone', 'wurmple', 'silcoon', 'beautifly', 'cascoon', 'dustox', 'lotad', 'lombre', 'ludicolo', 'seedot', 'nuzleaf', 'shiftry', 'taillow', 'swellow', 'wingull', 'pelipper', 'ralts', 'kirlia', 'gardevoir', 'surskit', 'masquerain', 'shroomish', 'breloom', 'slakoth', 'vigoroth', 'slaking', 'nincada', 'ninjask', 'shedinja', 'whismur', 'loudred', 'exploud', 'makuhita', 'hariyama', 'azurill', 'nosepass', 'skitty', 'delcatty', 'sableye', 'mawile', 'aron', 'lairon', 'aggron', 'meditite', 'medicham', 'electrike', 'manectric', 'plusle', 'minun', 'volbeat', 'illumise', 'roselia', 'gulpin', 'swalot', 'carvanha', 'sharpedo', 'wailmer', 'wailord', 'numel', 'camerupt', 'torkoal',];
+  
+
 
 let currentPokemon;
 
@@ -10,23 +13,19 @@ async function loadPokemon() {
     let response = await fetch(url);
     currentPokemon = await response.json();  
     console.log('Loaded pokemon', currentPokemon);
+    loadPokemonCards(i);
+}
+    
+    
 }
 
-    renderPokemonInfo();
-}
 
 
-// function renderPokemon() {
-//     let card = document.getElementById('card');
-//     card.innerHTML = '';
-
-//     card.innerHTML += /*html*/ `
-//     <div>
-//         `
-// }
+function renderPokemonInfo(i) {
+    document.getElementById('pokedex').classList.remove('dNone');
+    document.getElementById('pokedexInfoArea').classList.remove('dNone');
 
 
-function renderPokemonInfo() {
     let = pokekomNameContainer = document.getElementById('pokemonName');
     let pokemonName = currentPokemon['name'];
     pokemonName = pokemonName.charAt(0).toUpperCase() + pokemonName.slice(1);
@@ -86,23 +85,43 @@ function renderAbilities() {
 
 
 //////////// render Funktion Startseite
-function loadPokemonCards() {
-    let cards = document.getElementById('card');
-
+function loadPokemonCards(i) {
+    let cardsArea = document.getElementById('cardsArea');
     let pokemonName = currentPokemon['name'];
     pokemonName = pokemonName.charAt(0).toUpperCase() + pokemonName.slice(1);
-    pokekomNameContainer.innerHTML = pokemonName;
-    document.getElementById('pokemonImg').src = currentPokemon['sprites']['other']['home']['front_default'];
-    renderAbilities();
-    
-
-    cards.innerHTML = /*html*/ `
-    <h1>${pokemonName}</h1>
-    <h3>hallo</h3>
-    `;
-    
-
-    for (let i = 0; i < stats.length; i++) {
-        let statsName = currentPokemon['stats'][i]['stat']['name'];
-}
-}
+    let pokemonImageSrc = currentPokemon['sprites']['other']['home']['front_default'];
+    let types = currentPokemon['types'][0]['type']['name'];
+    let typesSecond = "";
+  
+    if (currentPokemon['types'].length >= 2) {
+      typesSecond = currentPokemon['types'][1]['type']['name'];
+      cardsArea.innerHTML += `
+        <div onclick="renderPokemonInfo(${i})" id="container${i}">
+          <div id="cards" class="${types}">
+            <h2>${pokemonName}</h2>
+            <div class="pokemonType">
+              <b>${types}</b>
+            </div>
+            <div class="pokemonTypeSecond">
+              <b>${typesSecond}</b>
+            </div>
+            <img id="pokemonNameCards" src="${pokemonImageSrc}">
+          </div>
+        </div>
+      `;
+    } else {
+      cardsArea.innerHTML += `
+        <div onclick="renderPokemonInfo(${i})" id="container${i}">
+          <div id="cards" class="${types}">
+            <h2>${pokemonName}</h2>
+            <div class="pokemonType">
+              <b>${types}</b>
+            </div>
+            <img id="pokemonNameCards" src="${pokemonImageSrc}">
+          </div>
+        </div>
+      `;
+    }
+  }
+  
+  

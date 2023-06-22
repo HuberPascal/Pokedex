@@ -8,8 +8,14 @@ body {
     min-height: 60vh;
     background-color: #FB6C6C;
     color: white;
-    display: flex;
     padding: 24px;
+}
+
+.pokedexInfoArea {
+    position: fixed;
+    top: 10%;
+    left: 300px;
+    right: 300px;
 }
 
 .info-container {
@@ -27,6 +33,17 @@ body {
     top: 42%;
     left: 50%;
     transform: translate(-50%, -50%);
+}
+
+.pokedexHeadImg {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 20px;
+}
+
+.pokedexHeadImg img {
+    height: 30px;
+    filter: invert(100%);
 }
 
 nav {
@@ -76,3 +93,123 @@ ul li {
     width: 50px;
 }
 
+
+#cards {
+    height: 150px;
+    width: 300px;
+    border-radius: 16px;
+    position: relative;
+    margin: 6px;
+    cursor: pointer;
+}
+
+#cards h2 {
+    font-size: 20px !important; 
+    padding-top: 20px;
+    padding-left: 16px;
+    color: white;
+}
+
+.pokemonType {
+    background-color: rgba(255, 255, 255, 0.2);
+    margin-left: 16px;
+    margin-bottom: 8px;
+    border-radius: 16px;
+    width: 100px;
+    text-align: center;
+    color: white;
+}
+
+.pokemonType b {
+    font-size: 12px;
+    font-weight: 500;
+}
+
+.pokemonTypeSecond {
+    background-color: rgba(255, 255, 255, 0.2);
+    margin-left: 16px;
+    border-radius: 16px;
+    width: 100px;
+    text-align: center;
+    color: white;
+}
+
+.pokemonTypeSecond b {
+    font-size: 12px;
+    font-weight: 500;
+}
+
+#pokemonNameCards {
+    position: absolute;
+    height: 120px;
+    bottom: 12px;
+    right: 20px;
+}
+
+#cardsArea {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.dNone {
+    display: none !important;
+}
+
+
+.water {
+    background-color: #75BEFE;
+  }
+  
+  .fire {
+    background-color: #FB6C6C;
+  }
+  
+  .grass {
+    background-color: #49D0B1;
+  }
+
+  .electric {
+    background-color: #FFD76E;
+  }
+
+  .psychic {
+    background-color: #794396;
+  }
+
+  .dark {
+    background-color: #E0986A;
+  }
+
+  .normal {
+    background-color: #CFCFC3;
+  }
+
+  .fighting {
+    background-color: #CF887C;
+  }
+  
+  .rock {
+    background-color: #CFC393;
+  }
+
+  .poison {
+    background-color: #B486DC;
+  }
+
+  .bug {
+    background-color: #B1D369;
+  }
+
+  .fairy {
+    background-color: #EE99AC;
+  }
+
+  .ice {
+    background-color: #98D8D8;
+  }
+
+  .steel {
+    background-color: #B7B8D0;
+  }
+
+  
