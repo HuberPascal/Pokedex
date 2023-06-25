@@ -3,6 +3,7 @@ let pokemon = [
 ];
 
 let currentPokemon;
+let pokemonImg;
 
 async function loadPokemon() {
   for (let i = 0; i < pokemon.length; i++) {
@@ -16,24 +17,57 @@ async function loadPokemon() {
   }
 }
 
-function renderPokemonInfo(index) {
+async function renderPokemonInfo(index) {
   document.getElementById('pokedex').classList.remove('dNone');
   document.getElementById('pokedexInfoArea').classList.remove('dNone');
 
   let pokemonNameContainer = document.getElementById('pokemonName');
+  let pokemonKlein = pokemon[index];
   let pokemonName = pokemon[index];
   pokemonName = pokemonName.charAt(0).toUpperCase() + pokemonName.slice(1);
   pokemonNameContainer.innerHTML = pokemonName;
+  let pokedexInfoAbilities = document.getElementById('pokedexInfoAbilities');
+
+  let url = `https://pokeapi.co/api/v2/pokemon/${pokemonKlein}`;
+  let response = await fetch(url);
+  pokemonImg = await response.json();
+  console.log('Geladenes Pokémon Bild:', pokemonImg);
 
   let pokemonImage = document.getElementById('pokemonImg');
-  pokemonImage.src = currentPokemon['sprites']['other']['official-artwork']['front_default'];
+  pokemonImage.src = pokemonImg['sprites']['other']['official-artwork']['front_default'];
 
-  renderAbilities(currentPokemon);
+  let types = pokemonImg['types'][0]['type']['name'];
+  document.getElementById('pokedex').classList.add(types);
+
+
+  if (pokemonImg['types'].length >= 2) {
+    typesSecond = pokemonImg['types'][1]['type']['name'];
+    pokedexInfoAbilities.innerHTML += `
+                <div class="pokemonTypeInfo">
+                    <b>${types}</b>
+                </div>
+                <div class="pokemonTypeSecondInfo">
+                    <b>${typesSecond}</b>
+                <div>
+    `;
+} else {
+    pokedexInfoAbilities.innerHTML += `
+                <div class="pokemonType">
+                    <b>${types}</b>
+                </div>   
+    `;
 }
 
-function renderAbilities(currentPokemon) {
-  let stats = currentPokemon['stats'];
-  let abilities = document.getElementById('abilities');
+renderAbout();
+
+}
+
+function renderBaseStats() {
+    document.getElementById('abilities').classList.remove('dNone');
+    document.getElementById('about').classList.add('dNone');
+    
+    let stats = pokemonImg['stats'];
+    let abilities = document.getElementById('abilities');
 
   abilities.innerHTML = ''; // Vorherige Fähigkeiten löschen
 
@@ -42,11 +76,11 @@ function renderAbilities(currentPokemon) {
       let baseStat = stats[i]['base_stat'];
 
       if (statsName === 'hp') {
-          statsName = 'KP';
+          statsName = 'HP';
       } else if (statsName === 'special-attack') {
-          statsName = 'Spez. Angriff';
+          statsName = 'Sp. Attack';
       } else if (statsName === 'special-defense') {
-          statsName = 'Spez. Verteidigung';
+          statsName = 'Sp. Defense';
       }
 
       statsName = statsName.charAt(0).toUpperCase() + statsName.slice(1);
@@ -109,6 +143,75 @@ function loadPokemonCards(index, currentPokemon) {
       `;
   }
 }
+
+
+
+
+
+function renderAbout() {
+    let about = document.getElementById('about');
+    about.classList.remove('dNone');
+    document.getElementById('abilities').classList.add('dNone');
+
+
+    let height = pokemonImg['height'];
+    let weight = pokemonImg['weight'];
+    weight = (weight / 10).toFixed(1);
+    let abilities1 = pokemonImg['abilities'][0]['ability']['name'];
+    let abilities2 = pokemonImg['abilities'][1]['ability']['name'];
+
+    console.log('die Spezies ist', height);
+
+
+    about.innerHTML = '';
+    about.innerHTML = `
+    <div>
+        <div class="aboutSection">
+            <p>Height</p>
+            <p>${height}0cm</p>
+        </div>
+        <div class="aboutSection">
+            <p>Weight</p>
+            <p>${weight}kg</p>
+        </div>
+        <div class="aboutSection">
+            <p>Abilities</p>
+            <p class="infoWidth">${abilities1}, ${abilities2}</p>
+        </div>
+        <div class="aboutSection">
+        <p>Moves</p>
+        <p>${weight}kg</p>
+    </div>
+    `;
+}
+
+
+function renderMoves() {
+    let moves = document.getElementById('moves');
+
+}
+
+
+function likeBtn() {
+    let likeBtn = document.getElementById('likeBtn').src;
+    if(likeBtn.indexOf('img/herz(3).png') != -1) {
+        document.getElementById('likeBtn').src = 'img/herz(4).png';
+    } else {
+        document.getElementById('likeBtn').src = 'img/herz(3).png';
+    }
+}
+
+
+function goBack() {
+    document.getElementById('pokedexInfoArea').classList.add('dNone');
+}
+
+
+
+
+
+
+
 
 
 

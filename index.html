@@ -26,6 +26,7 @@
         ></script>
 
         <title>Pokedex</title>
+        <link rel="icon" type="image/x-icon" href="./img/pokeball.png" />
     </head>
     <body onload="loadPokemon()">
         <h2>Pokedex</h2>
@@ -38,26 +39,31 @@
             
             <div id="pokedex">
                 <div class="pokedexHeadImg">
-                    <img src="./img/pfeil.png" alt="">
-                    <img src="./img/herz(2).png" alt="">
+                    <img onclick="goBack()" src="./img/pfeil(white).png" alt="">
+                    <img onclick="likeBtn()" id="likeBtn" src="./img/herz(3).png" alt="">
                 </div>
                 <h1 id="pokemonName"></h1>
+                <div id="pokedexInfoAbilities"></div>
             </div>
+
 
             <div class="info-container">
                 <img id="pokemonImg" />
 
                 <nav>
                     <ul>
-                        <li>About</li>
-                        <li>Base Stats</li>
-                        <li>About</li>
+                        <li onclick="renderAbout()">About</li>
+                        <li onclick="renderBaseStats()">Base Stats</li>
+                        <li onclick="renderMoves()">Moves</li>
                     </ul>
                 </nav>
 
                 <div class="line"></div>
 
-                <div id="abilities"></div>
+
+                <div id="about"></div>
+                <div id="abilities" class="dNone"></div>
+                <div id="moves" class="dNone"></div>
             </div>
         </div>
     </body>

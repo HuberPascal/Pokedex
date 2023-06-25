@@ -5,8 +5,8 @@ body {
 }
 
 #pokedex {
-    min-height: 60vh;
-    background-color: #FB6C6C;
+    min-height: 55vh;
+    /* background-color: #FB6C6C; */
     color: white;
     padding: 24px;
 }
@@ -23,6 +23,7 @@ body {
     border-top-left-radius: 40px;
     border-top-right-radius: 40px;
     margin-top: -40px;
+    padding-bottom: 30px;
     min-height: 100px;
 } 
 
@@ -43,7 +44,6 @@ body {
 
 .pokedexHeadImg img {
     height: 30px;
-    filter: invert(100%);
 }
 
 nav {
@@ -125,6 +125,20 @@ ul li {
     font-weight: 500;
 }
 
+.pokemonTypeInfo {
+  background-color: rgba(255, 255, 255, 0.2);
+  margin-bottom: 8px;
+  border-radius: 16px;
+  width: 100px;
+  text-align: center;
+  color: white;
+}
+
+.pokemonTypeInfo b {
+  font-size: 12px;
+  font-weight: 500;
+}
+
 .pokemonTypeSecond {
     background-color: rgba(255, 255, 255, 0.2);
     margin-left: 16px;
@@ -137,6 +151,19 @@ ul li {
 .pokemonTypeSecond b {
     font-size: 12px;
     font-weight: 500;
+}
+
+.pokemonTypeSecondInfo {
+  background-color: rgba(255, 255, 255, 0.2);
+  border-radius: 16px;
+  width: 100px;
+  text-align: center;
+  color: white;
+}
+
+.pokemonTypeSecondInfo b {
+  font-size: 12px;
+  font-weight: 500;
 }
 
 #pokemonNameCards {
@@ -153,6 +180,32 @@ ul li {
 
 .dNone {
     display: none !important;
+}
+
+.mg0 {
+  margin: 0 !important;
+}
+
+.aboutSection {
+  display: flex;
+  gap: 30px;
+  margin-left: 16px;
+}
+
+.aboutSection p {
+  width: 100px;
+}
+
+.infoWidth {
+  width: 200px !important;
+}
+
+#about {
+  height: 200px;
+}
+
+#abilities {
+  height: 200px;
 }
 
 
