@@ -4,6 +4,7 @@ let pokemon = [
 
 let currentPokemon;
 let pokemonImg;
+let audio = new Audio('audio/Pokémon-Thema (Komm schnapp sie dir).m4a');
 
 async function loadPokemon() {
   for (let i = 0; i < pokemon.length; i++) {
@@ -17,9 +18,12 @@ async function loadPokemon() {
   }
 }
 
+
 async function renderPokemonInfo(index) {
   document.getElementById('pokedex').classList.remove('dNone');
   document.getElementById('pokedexInfoArea').classList.remove('dNone');
+  document.getElementById('overlay').classList.remove('dNone');
+//   document.getElementById('cardsArea').classList.add('background');
 
   let pokemonNameContainer = document.getElementById('pokemonName');
   let pokemonKlein = pokemon[index];
@@ -38,7 +42,7 @@ async function renderPokemonInfo(index) {
 
   let types = pokemonImg['types'][0]['type']['name'];
   document.getElementById('pokedex').classList.add(types);
-
+  pokedexInfoAbilities.innerHTML = '';
 
   if (pokemonImg['types'].length >= 2) {
     typesSecond = pokemonImg['types'][1]['type']['name'];
@@ -52,7 +56,7 @@ async function renderPokemonInfo(index) {
     `;
 } else {
     pokedexInfoAbilities.innerHTML += `
-                <div class="pokemonType">
+                <div class="pokemonTypeInfo">
                     <b>${types}</b>
                 </div>   
     `;
@@ -118,6 +122,7 @@ function loadPokemonCards(index, currentPokemon) {
       cardsArea.innerHTML += `
           <div onclick="renderPokemonInfo(${index})" id="container${index}">
               <div id="cards" class="${types}">
+                  <img class="pokeballImg" src="./img/pokeball_bg.png">
                   <h2>${pokemonName}</h2>
                   <div class="pokemonType">
                       <b>${types}</b>
@@ -133,6 +138,7 @@ function loadPokemonCards(index, currentPokemon) {
       cardsArea.innerHTML += `
           <div onclick="renderPokemonInfo(${index})" id="container${index}">
               <div id="cards" class="${types}">
+                  <img class="pokeballImg" src="./img/pokeball_bg.png">
                   <h2>${pokemonName}</h2>
                   <div class="pokemonType">
                       <b>${types}</b>
@@ -188,6 +194,9 @@ function renderAbout() {
 
 function renderMoves() {
     let moves = document.getElementById('moves');
+    moves.classList.remove('dNone');
+    document.getElementById('about').classList.add('dNone');
+    document.getElementById('abilities').classList.add('dNone');
 
 }
 
@@ -204,7 +213,39 @@ function likeBtn() {
 
 function goBack() {
     document.getElementById('pokedexInfoArea').classList.add('dNone');
+    document.getElementById('overlay').classList.add('dNone');
 }
+
+
+function playMusic() {
+    document.getElementById('musicConfirmation').classList.add('dNone');
+    if(audio.paused) {
+        audio.play();
+        audio.volume = 0.5;
+        startAnimateImage();
+    } else {
+        audio.pause();
+        stopAnimateImage();
+    }
+}
+
+function noneMusic() {
+    document.getElementById('musicConfirmation').classList.add('dNone');
+}
+
+
+function startAnimateImage() {
+    const animateImage = document.getElementById('animateImage');
+    animateImage.classList.add('zoomed');
+}
+
+function stopAnimateImage() {
+    const animateImage = document.getElementById('animateImage');
+    animateImage.classList.remove('zoomed');
+}
+
+
+
 
 
 

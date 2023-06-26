@@ -29,11 +29,16 @@
         <link rel="icon" type="image/x-icon" href="./img/pokeball.png" />
     </head>
     <body onload="loadPokemon()">
-        <h2>Pokedex</h2>
+        <header>
+            <img src="./img/pokeball(2).png" alt="">
+            <h1>Pokedex</h1>
+            <img id="animateImage" class="cursor" onclick="playMusic(), animateImage()" src="./img/lautsprecher(2).png" alt="">
+        </header>
 
-        <!-- <div id="cards"></div> -->
 
         <div id="cardsArea"></div>
+
+        <div id="overlay" class="dNone"></div>
 
         <div id="pokedexInfoArea" class="pokedexInfoArea dNone">
             
@@ -42,7 +47,7 @@
                     <img onclick="goBack()" src="./img/pfeil(white).png" alt="">
                     <img onclick="likeBtn()" id="likeBtn" src="./img/herz(3).png" alt="">
                 </div>
-                <h1 id="pokemonName"></h1>
+                <h3 id="pokemonName"></h3>
                 <div id="pokedexInfoAbilities"></div>
             </div>
 
@@ -66,5 +71,13 @@
                 <div id="moves" class="dNone"></div>
             </div>
         </div>
+
+        <div id="musicConfirmation" class="musicConfirmation">
+            <h3>Möchten Sie Musik abspielen?</h3>
+            <div class="buttonContainer">
+              <button onclick="playMusic()">Ja</button>
+              <button onclick="noneMusic()">Nein</button>
+            </div>
+          </div>
     </body>
 </html>
