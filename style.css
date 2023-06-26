@@ -281,6 +281,11 @@ ul li {
   display: block;
 }
 
+#pokemonNumber {
+  position: fixed;
+  right: 24px;
+  top: 100px;
+}
 
 
 .water {

@@ -4,6 +4,7 @@ let pokemon = [
 
 let currentPokemon;
 let pokemonImg;
+let number = 0;
 let audio = new Audio('audio/Pokémon-Thema (Komm schnapp sie dir).m4a');
 
 async function loadPokemon() {
@@ -23,7 +24,6 @@ async function renderPokemonInfo(index) {
   document.getElementById('pokedex').classList.remove('dNone');
   document.getElementById('pokedexInfoArea').classList.remove('dNone');
   document.getElementById('overlay').classList.remove('dNone');
-//   document.getElementById('cardsArea').classList.add('background');
 
   let pokemonNameContainer = document.getElementById('pokemonName');
   let pokemonKlein = pokemon[index];
@@ -39,6 +39,15 @@ async function renderPokemonInfo(index) {
 
   let pokemonImage = document.getElementById('pokemonImg');
   pokemonImage.src = pokemonImg['sprites']['other']['official-artwork']['front_default'];
+
+  let pokemonNumber = pokemonImg['id'];
+  console.log('the number is', pokemonNumber);
+  let pokemonNumberContainer = document.getElementById('pokemonNumber');
+  pokemonNumberContainer.innerHTML = '';
+  pokemonNumberContainer.innerHTML += `
+    <div class"pokemonNumber">#00${pokemonNumber}</div>
+  `;
+
 
   let types = pokemonImg['types'][0]['type']['name'];
   document.getElementById('pokedex').classList.add(types);
@@ -61,10 +70,10 @@ async function renderPokemonInfo(index) {
                 </div>   
     `;
 }
-
+number++;
 renderAbout();
-
 }
+
 
 function renderBaseStats() {
     document.getElementById('abilities').classList.remove('dNone');
