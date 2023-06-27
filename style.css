@@ -61,7 +61,7 @@ header img {
     margin-top: -40px;
     padding-bottom: 30px;
     min-height: 100px;
-    min-width: 600px;
+    width: 600px;
     padding: 16px 32px;
 } 
 
@@ -111,7 +111,7 @@ ul li {
 
 .line {
     border: 1px solid rgba(0, 0, 0, 0.05);
-    margin-bottom: 20px;
+    margin-bottom: 10px;
 }
 
 .flex {
@@ -260,6 +260,24 @@ ul li {
   height: 200px;
 }
 
+#moves {
+  height: 200px;
+  display: flex;
+  flex-wrap: wrap;
+  overflow: scroll;
+}
+
+#moves p {
+  margin: 4px;
+  padding: 4px 12px;
+  background-color: rgba(0, 0, 0, 0.1);
+  border-radius: 10px;
+  white-space: nowrap;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
 .zoomed {
   animation: zoomAnimation 1s infinite alternate;
 }
@@ -287,10 +305,21 @@ ul li {
   display: block;
 }
 
+.overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+}
+
 #pokemonNumber {
   position: absolute;
   left: 50%;
-  top: 43px;
+  top: 44px;
+  transform: translate(-50%, -50%);
+  font-size: 20px;
 }
 
 #pokemonBackgroundImg {

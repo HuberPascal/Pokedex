@@ -61,9 +61,9 @@
 
                 <nav>
                     <ul>
-                        <li onclick="renderAbout()">About</li>
-                        <li onclick="renderBaseStats()">Base Stats</li>
-                        <li onclick="renderMoves()">Moves</li>
+                        <li onclick="showAbout()">About</li>
+                        <li onclick="showBaseStats()">Base Stats</li>
+                        <li onclick="showMoves()">Moves</li>
                     </ul>
                 </nav>
 
@@ -71,17 +71,19 @@
 
 
                 <div id="about"></div>
-                <div id="abilities" class="dNone"></div>
-                <div id="moves" class=""></div>
+                <div id="abilities"></div>
+                <div id="moves"></div>
             </div>
         </div>
 
-        <div id="musicConfirmation" class="musicConfirmation">
-            <h3>Möchten Sie Musik abspielen?</h3>
-            <div class="buttonContainer">
-              <button onclick="playMusic()">Ja</button>
-              <button onclick="noneMusic()">Nein</button>
+        <div id="overlayStartContainer" class="overlay">
+            <div id="musicConfirmation" class="musicConfirmation">
+                <h3>Möchten Sie Musik abspielen?</h3>
+                <div class="buttonContainer">
+                <button onclick="playMusic()">Ja</button>
+                <button onclick="noneMusic()">Nein</button>
+                </div>
             </div>
-          </div>
+        </div>
     </body>
 </html>

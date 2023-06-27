@@ -20,7 +20,7 @@ async function loadPokemon() {
 }
 
 
-async function renderPokemonInfo(index) {
+async function renderPokemonInfo(index) {  // index = Zahl eines Pokemons. Damit immer die richtigen Daten geladen werden
   document.getElementById('pokedex').classList.remove('dNone');
   document.getElementById('pokedexInfoArea').classList.remove('dNone');
   document.getElementById('overlay').classList.remove('dNone');
@@ -40,7 +40,7 @@ async function renderPokemonInfo(index) {
   let pokemonImage = document.getElementById('pokemonImg');
   pokemonImage.src = pokemonImg['sprites']['other']['official-artwork']['front_default'];
 
-    // moves(pokemonImg);
+//   renderMoves(pokemonImg);
 
   let pokemonNumber = pokemonImg['id'];
   console.log('the number is', pokemonNumber);
@@ -73,14 +73,14 @@ async function renderPokemonInfo(index) {
     `;
 }
 number++;
+
 renderAbout();
+renderBaseStats();
+renderMoves();
 }
 
 
 function renderBaseStats() {
-    document.getElementById('abilities').classList.remove('dNone');
-    document.getElementById('about').classList.add('dNone');
-    
     let stats = pokemonImg['stats'];
     let abilities = document.getElementById('abilities');
 
@@ -120,7 +120,7 @@ function renderBaseStats() {
 
 
 //////////// render Funktion Startseite
-function loadPokemonCards(index, currentPokemon) {
+function loadPokemonCards(index, currentPokemon) {   // i ist ab jetzt index. i hat immer den Wert eines Pokemons
   let cardsArea = document.getElementById('cardsArea');
   let pokemonName = pokemon[index];
   pokemonName = pokemonName.charAt(0).toUpperCase() + pokemonName.slice(1);
@@ -130,8 +130,9 @@ function loadPokemonCards(index, currentPokemon) {
 
   if (currentPokemon['types'].length >= 2) {
       typesSecond = currentPokemon['types'][1]['type']['name'];
+      // index = Zahl eines Pokemons
       cardsArea.innerHTML += `
-          <div onclick="renderPokemonInfo(${index})" id="container${index}">
+          <div onclick="renderPokemonInfo(${index})" id="container${index}">  
               <div id="cards" class="${types}">
                   <img class="pokeballImg" src="./img/pokeball_bg.png">
                   <h2>${pokemonName}</h2>
@@ -166,10 +167,9 @@ function loadPokemonCards(index, currentPokemon) {
 
 
 function renderAbout() {
-    let about = document.getElementById('about');
-    about.classList.remove('dNone');
     document.getElementById('abilities').classList.add('dNone');
-
+    document.getElementById('moves').classList.add('dNone');
+    
 
     let height = pokemonImg['height'];
     let weight = pokemonImg['weight'];
@@ -203,13 +203,13 @@ function renderAbout() {
 }
 
 
-function renderMoves() {
-    let moves = document.getElementById('moves');
-    moves.classList.remove('dNone');
-    document.getElementById('about').classList.add('dNone');
-    document.getElementById('abilities').classList.add('dNone');
+// function renderMoves() {
+//     let moves = document.getElementById('moves');
+//     moves.classList.remove('dNone');
+//     document.getElementById('about').classList.add('dNone');
+//     document.getElementById('abilities').classList.add('dNone');
 
-}
+// }
 
 
 function likeBtn() {
@@ -229,6 +229,7 @@ function goBack() {
 
 
 function playMusic() {
+    document.getElementById('overlayStartContainer').classList.remove('overlay');
     document.getElementById('musicConfirmation').classList.add('dNone');
     if(audio.paused) {
         audio.play();
@@ -241,6 +242,7 @@ function playMusic() {
 }
 
 function noneMusic() {
+    document.getElementById('overlayStartContainer').classList.remove('overlay');
     document.getElementById('musicConfirmation').classList.add('dNone');
 }
 
@@ -260,23 +262,46 @@ function stopAnimateImage() {
 
 
 
-// function moves(pokemonImg) {
-//     let moves = document.getElementById('moves');
-//     let pokemonMoves = pokemonImg['moves'];
+function renderMoves() { 
+    let pokemonMoves = pokemonImg['moves'];
+    // moves.innerHTML ='';
 
-//     for (let i = 0; i < pokemonMoves.length; i++) {
-//         if(pokemonMoves[i]['move']['name'])
-//         // const element = pokemonMoves[i];
-//         pokemonImg = pokemonMoves[i]['move']['name'];
-//         console.log('hallo', pokemonImg);
-//         moves.innerHTML += `
-//         <div>${pokemonImg}</div>
-//         `;
-//     }
+    for (let i = 0; i < pokemonMoves.length; i++) {
+        if(pokemonMoves[i]['move']['name'])
+        // const element = pokemonMoves[i];
+        pokemonImg = pokemonMoves[i]['move']['name'];
+        console.log('hallo', pokemonImg);
+        moves.innerHTML += `
+        <div class="movesCards">
+            <p>${pokemonImg}</p>
+        </div>
+        `;
+    }
+}
 
-// }
+
+function showAbout() {
+    document.getElementById('abilities').classList.add('dNone');
+    document.getElementById('moves').classList.add('dNone');
+    let about = document.getElementById('about');
+    about.classList.remove('dNone');
+}
 
 
+function showBaseStats() {
+    document.getElementById('about').classList.add('dNone');
+    document.getElementById('moves').classList.add('dNone');
+    let baseStats = document.getElementById('abilities');
+    baseStats.classList.remove('dNone');
+}
+
+
+function showMoves() {
+    document.getElementById('about').classList.add('dNone');
+    document.getElementById('abilities').classList.add('dNone');
+    let moves = document.getElementById('moves');
+    moves.classList.remove('dNone');
+}
 
 
 
