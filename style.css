@@ -6,8 +6,8 @@ body {
     justify-content: center;
     flex-direction: column;
     background-image: url(./img/5073414.jpg);
-    background-repeat: no-repeat;
-    background-size: cover;
+    /* background-repeat: no-repeat; */
+    background-size: contain;
 }
 
 h1 {
@@ -72,6 +72,7 @@ header img {
     top: 43%;
     left: 50%;
     transform: translate(-50%, -50%);
+    z-index: 1;
 }
 
 .pokedexHeadImg {
@@ -137,6 +138,11 @@ ul li {
     position: relative;
     margin: 6px;
     cursor: pointer;
+}
+
+#cards:hover #pokemonNameCards  {
+  transform: scale(1.2) !important;
+  transition: transform 0.3s ease-in-out;
 }
 
 .pokeballImg {
@@ -282,9 +288,21 @@ ul li {
 }
 
 #pokemonNumber {
-  position: fixed;
-  right: 24px;
-  top: 100px;
+  position: absolute;
+  left: 50%;
+  top: 43px;
+}
+
+#pokemonBackgroundImg {
+  height: 240px;
+  width: 240px;
+  background-image: url('./img/pokeball_bg.png');
+  background-repeat: no-repeat;
+  position: absolute;
+  top: 180px;
+  left: 180px;
+  opacity: 0.2;
+  transform: scale(1.5) !important;
 }
 
 
@@ -305,8 +323,8 @@ ul li {
   }
   
   .psychic {
-    background: linear-gradient(to bottom right, #794396, #AE8EC9);
-  }
+    background: linear-gradient(to bottom right, #FD86E4, #6E3C86);
+  }  
   
   .dark {
     background: linear-gradient(to bottom right, #E0986A, #F0BBA6);
@@ -343,6 +361,19 @@ ul li {
   .steel {
     background: linear-gradient(to bottom right, #B7B8D0, #D5D6E3);
   }
+
+  .ground {
+    background: linear-gradient(to bottom right, #F5D7B5, #DDAC84);
+  }
+
+  .ghost {
+    background: linear-gradient(to bottom right, #F6C9E5, #9C73B3);
+  }
+
+  .dragon {
+    background: linear-gradient(to bottom right, #AFA0F6, #7C63E7);
+  }
+  
   
 
   
