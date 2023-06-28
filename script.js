@@ -2,8 +2,9 @@ let pokemon = [
     'bulbasaur', 'ivysaur', 'venusaur', 'charmander', 'charmeleon', 'charizard', 'squirtle', 'wartortle', 'blastoise', 'caterpie', 'metapod', 'butterfree', 'weedle', 'kakuna', 'beedrill', 'pidgey', 'pidgeotto', 'pidgeot', 'rattata', 'raticate', 'spearow', 'fearow', 'ekans', 'arbok', 'pikachu', 'raichu', 'sandshrew', 'sandslash', 'nidoran-f', 'nidorina', 'nidoqueen', 'nidoran-m',];
     //  'nidorino', 'nidoking', 'clefairy', 'clefable', 'vulpix', 'ninetales', 'jigglypuff', 'wigglytuff', 'zubat', 'golbat', 'oddish', 'gloom', 'vileplume', 'paras', 'parasect', 'venonat', 'venomoth', 'diglett', 'dugtrio', 'meowth', 'persian', 'psyduck', 'golduck', 'mankey', 'primeape', 'growlithe', 'arcanine', 'poliwag', 'poliwhirl', 'poliwrath', 'abra', 'kadabra', 'alakazam', 'machop', 'machoke', 'machamp', 'bellsprout', 'weepinbell', 'victreebel', 'tentacool', 'tentacruel', 'geodude', 'graveler', 'golem', 'ponyta', 'rapidash', 'slowpoke', 'slowbro', 'magnemite', 'magneton', 'farfetchd', 'doduo', 'dodrio', 'seel', 'dewgong', 'grimer', 'muk', 'shellder', 'cloyster', 'gastly', 'haunter', 'gengar', 'onix', 'drowzee', 'hypno', 'krabby', 'kingler', 'voltorb', 'electrode', 'exeggcute', 'exeggutor', 'cubone', 'marowak', 'hitmonlee', 'hitmonchan', 'lickitung', 'koffing', 'weezing', 'rhyhorn', 'rhydon', 'chansey', 'tangela', 'kangaskhan', 'horsea', 'seadra', 'goldeen', 'seaking', 'staryu', 'starmie', 'mr-mime', 'scyther', 'jynx', 'electabuzz', 'magmar', 'pinsir', 'tauros', 'magikarp', 'gyarados', 'lapras', 'ditto', 'eevee', 'vaporeon', 'jolteon', 'flareon', 'porygon', 'omanyte', 'omastar', 'kabuto', 'kabutops', 'aerodactyl', 'snorlax', 'articuno', 'zapdos', 'moltres', 'dratini', 'dragonair'];
   
-
+let pokemonEvolution1 = ['bulbasaur', 'ivysaur', 'venusaur'];
 let currentPokemon;
+let evolutionPokemon;
 let pokemonImg;
 let number = 0;
 let audio = new Audio('audio/Pokémon-Thema (Komm schnapp sie dir).m4a');
@@ -16,10 +17,34 @@ async function loadPokemon() {
       let url = `https://pokeapi.co/api/v2/pokemon/${pokemonName}`;
       let response = await fetch(url);
       currentPokemon = await response.json();
-      console.log('Geladenes Pokémon:', currentPokemon);
+      console.log(currentPokemon);
       loadPokemonCards(i, currentPokemon);
   }
 }
+
+async function loadPokemonEvolution() {
+    let abc = document.getElementById('evolution');
+
+    for (let i = 2; i <= pokemonEvolution1.length; i++) { // erstes Pokemon hat keine Entwicklungsstufe
+
+        let url = `https://pokeapi.co/api/v2/pokemon-species/${i}/`;
+        let response = await fetch(url);
+        evolutionPokemon = await response.json();
+        evolutionPokemon = evolutionPokemon['evolves_from_species']['name'];
+        console.log('evolution ist', evolutionPokemon);
+
+        abc.innerHTML += `
+        <div>${evolutionPokemon}</div>
+        `;
+    }
+    }
+
+
+
+
+
+
+
 
 
 async function renderPokemonInfo(index) {  // index = Zahl eines Pokemons. Damit immer die richtigen Daten geladen werden
@@ -37,21 +62,33 @@ async function renderPokemonInfo(index) {  // index = Zahl eines Pokemons. Damit
   let url = `https://pokeapi.co/api/v2/pokemon/${pokemonKlein}`;
   let response = await fetch(url);
   pokemonImg = await response.json();
-  console.log('Geladenes Pokémon Bild:', pokemonImg);
 
   let pokemonImage = document.getElementById('pokemonImg');
   pokemonImage.src = pokemonImg['sprites']['other']['official-artwork']['front_default'];
 
-  let goNextImg = document.getElementById('goNextImg');
-  goNextImg.innerHTML = `
-    <img id="goLeft" onclick="goLeft(${index})" class="linkerPfeil imghover" src="./img/linker-pfeil.png" alt="">
-    <img id="goRight" onclick="goRight(${index})" class="rechterPfeil imghover" src="./img/rechter-pfeil.png" alt="">
-  `;
 
-//   renderMoves(pokemonImg);
+  let goNextImg = document.getElementById('goNextImg');
+  let goNextImgHTML = '';
+  
+  if (index > 0) {
+    goNextImgHTML += `
+      <img id="goLeft" onclick="goLeft(${index})" class="linkerPfeil imghover" src="./img/linker-pfeil.png" alt="">
+    `;
+  } else {
+    // Hier können Sie optional einen anderen HTML-Code hinzufügen, falls index <= 0
+  }
+  
+  if (index < pokemon.length - 1) {
+    goNextImgHTML += `
+      <img id="goRight" onclick="goRight(${index})" class="rechterPfeil imghover" src="./img/rechter-pfeil.png" alt="">
+    `;
+  } else {
+    // Hier können Sie optional einen anderen HTML-Code hinzufügen, falls index >= pokemon.length - 1
+  }
+  goNextImg.innerHTML = goNextImgHTML;
+  
 
   let pokemonNumber = pokemonImg['id'];
-  console.log('the number is', pokemonNumber);
   let pokemonNumberContainer = document.getElementById('pokemonNumber');
   pokemonNumberContainer.innerHTML = '';
   pokemonNumberContainer.innerHTML += `
@@ -60,6 +97,7 @@ async function renderPokemonInfo(index) {  // index = Zahl eines Pokemons. Damit
 
 
   let types = pokemonImg['types'][0]['type']['name'];
+  document.getElementById('pokedex').classList = '';
   document.getElementById('pokedex').classList.add(types);
   pokedexInfoAbilities.innerHTML = '';
 
@@ -81,10 +119,11 @@ async function renderPokemonInfo(index) {  // index = Zahl eines Pokemons. Damit
     `;
 }
 number++;
-
-renderAbout();
+showAbout();
+renderAbout(pokemonName);
 renderBaseStats();
 renderMoves();
+loadPokemonEvolution();
 }
 
 
@@ -174,7 +213,7 @@ function loadPokemonCards(index, currentPokemon) {   // i ist ab jetzt index. i 
 
 
 
-function renderAbout() {
+function renderAbout(pokemonName) {
     document.getElementById('abilities').classList.add('dNone');
     document.getElementById('moves').classList.add('dNone');
     
@@ -183,14 +222,18 @@ function renderAbout() {
     let weight = pokemonImg['weight'];
     weight = (weight / 10).toFixed(1);
     let abilities1 = pokemonImg['abilities'][0]['ability']['name'];
-    let abilities2 = pokemonImg['abilities'][1]['ability']['name'];
+    // überprüfen ob zwei "ability" vorhanden sind. links oder rechts wird ausgeführt
+    let abilities2 = pokemonImg['abilities'][1] ? pokemonImg['abilities'][1]['ability']['name'] : '';
 
-    console.log('die Spezies ist', height);
 
 
     about.innerHTML = '';
     about.innerHTML = `
     <div>
+        <div class="aboutSection">
+            <p>Species</p>
+            <p>${pokemonName}</p>
+        </div>
         <div class="aboutSection">
             <p>Height</p>
             <p>${height}0cm</p>
@@ -203,21 +246,9 @@ function renderAbout() {
             <p>Abilities</p>
             <p class="infoWidth">${abilities1}, ${abilities2}</p>
         </div>
-        <div class="aboutSection">
-        <p>Moves</p>
-        <p>${weight}kg</p>
     </div>
     `;
 }
-
-
-// function renderMoves() {
-//     let moves = document.getElementById('moves');
-//     moves.classList.remove('dNone');
-//     document.getElementById('about').classList.add('dNone');
-//     document.getElementById('abilities').classList.add('dNone');
-
-// }
 
 
 function likeBtn() {
@@ -266,10 +297,6 @@ function stopAnimateImage() {
 }
 
 
-
-
-
-
 function renderMoves() { 
     let pokemonMoves = pokemonImg['moves'];
     // moves.innerHTML ='';
@@ -278,7 +305,6 @@ function renderMoves() {
         if(pokemonMoves[i]['move']['name'])
         // const element = pokemonMoves[i];
         pokemonImg = pokemonMoves[i]['move']['name'];
-        console.log('hallo', pokemonImg);
         moves.innerHTML += `
         <div class="movesCards">
             <p>${pokemonImg}</p>
@@ -291,6 +317,7 @@ function renderMoves() {
 function showAbout() {
     document.getElementById('abilities').classList.add('dNone');
     document.getElementById('moves').classList.add('dNone');
+    document.getElementById('evolution').classList.add('dNone');
     let about = document.getElementById('about');
     about.classList.remove('dNone');
 }
@@ -299,6 +326,7 @@ function showAbout() {
 function showBaseStats() {
     document.getElementById('about').classList.add('dNone');
     document.getElementById('moves').classList.add('dNone');
+    document.getElementById('evolution').classList.add('dNone');
     let baseStats = document.getElementById('abilities');
     baseStats.classList.remove('dNone');
 }
@@ -307,39 +335,50 @@ function showBaseStats() {
 function showMoves() {
     document.getElementById('about').classList.add('dNone');
     document.getElementById('abilities').classList.add('dNone');
+    document.getElementById('evolution').classList.add('dNone');
     let moves = document.getElementById('moves');
     moves.classList.remove('dNone');
 }
 
 
-async function goLeft(index) {
-    if(index > 0) {
+function showEvolution() {
+    document.getElementById('about').classList.add('dNone');
+    document.getElementById('abilities').classList.add('dNone');
+    document.getElementById('moves').classList.add('dNone');
+    let evolutionsContainer = document.getElementById('evolution');
+    evolutionsContainer.classList.remove('dNone');
+}
+
+
+function goLeft(index) {
+    if (index > 0) {
         index = index - 1;
         renderPokemonInfo(index);
     }
 
-    if(index > 0) {
+    if (index === 0) {
         renderPokemonInfo(index);
-    } else {
-        await renderPokemonInfo(index);
         hiddenGoLeft();
-    }
-}
-
-
-async function goRight(index) {
-    if(index < pokemon.length -1) {
-        index = index + 1
-        renderPokemonInfo(index);
-    }
-
-    if(index < pokemon.length -1) {
-        renderPokemonInfo(index);
     } else {
-        await renderPokemonInfo(index);
-        hiddenGoRight();
+        renderPokemonInfo(index);
     }
 }
+
+
+function goRight(index) {
+    if (index < pokemon.length - 1) {
+        index = index + 1;
+        renderPokemonInfo(index);
+    }
+
+    if (index === pokemon.length - 1) {
+        renderPokemonInfo(index);
+        hiddenGoRight();
+    } else {
+        renderPokemonInfo(index);
+    }
+}
+
 
 
 function hiddenGoRight() {
@@ -350,32 +389,3 @@ function hiddenGoLeft() {
     document.getElementById('goLeft').classList.add('dNone');
 }
 
-
-// if(imgSeries < images.length -1) {
-//     i = imgSeries + 1;
-// }else {
-//     // i = 0;
-// }
-
-// if(imgSeries < images.length -2) {
-//     openImage(i);
-// }else {
-//     openImage(i);
-//     hiddenGoRight();
-// }
-
-
-// function goLeft() {
-//     if(imgSeries > 0) {
-//         i = imgSeries - 1;
-//     }else {
-//         // i = images.length - 1;
-//     }
-
-//     if(imgSeries > 1) {
-//         openImage(i);
-//     }else {
-//         openImage(i);
-//         hiddenGoLeft();
-//     }
-// }
