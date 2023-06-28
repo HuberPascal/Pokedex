@@ -2,9 +2,7 @@ let pokemon = [
     'bulbasaur', 'ivysaur', 'venusaur', 'charmander', 'charmeleon', 'charizard', 'squirtle', 'wartortle', 'blastoise', 'caterpie', 'metapod', 'butterfree', 'weedle', 'kakuna', 'beedrill', 'pidgey', 'pidgeotto', 'pidgeot', 'rattata', 'raticate', 'spearow', 'fearow', 'ekans', 'arbok', 'pikachu', 'raichu', 'sandshrew', 'sandslash', 'nidoran-f', 'nidorina', 'nidoqueen', 'nidoran-m',];
     //  'nidorino', 'nidoking', 'clefairy', 'clefable', 'vulpix', 'ninetales', 'jigglypuff', 'wigglytuff', 'zubat', 'golbat', 'oddish', 'gloom', 'vileplume', 'paras', 'parasect', 'venonat', 'venomoth', 'diglett', 'dugtrio', 'meowth', 'persian', 'psyduck', 'golduck', 'mankey', 'primeape', 'growlithe', 'arcanine', 'poliwag', 'poliwhirl', 'poliwrath', 'abra', 'kadabra', 'alakazam', 'machop', 'machoke', 'machamp', 'bellsprout', 'weepinbell', 'victreebel', 'tentacool', 'tentacruel', 'geodude', 'graveler', 'golem', 'ponyta', 'rapidash', 'slowpoke', 'slowbro', 'magnemite', 'magneton', 'farfetchd', 'doduo', 'dodrio', 'seel', 'dewgong', 'grimer', 'muk', 'shellder', 'cloyster', 'gastly', 'haunter', 'gengar', 'onix', 'drowzee', 'hypno', 'krabby', 'kingler', 'voltorb', 'electrode', 'exeggcute', 'exeggutor', 'cubone', 'marowak', 'hitmonlee', 'hitmonchan', 'lickitung', 'koffing', 'weezing', 'rhyhorn', 'rhydon', 'chansey', 'tangela', 'kangaskhan', 'horsea', 'seadra', 'goldeen', 'seaking', 'staryu', 'starmie', 'mr-mime', 'scyther', 'jynx', 'electabuzz', 'magmar', 'pinsir', 'tauros', 'magikarp', 'gyarados', 'lapras', 'ditto', 'eevee', 'vaporeon', 'jolteon', 'flareon', 'porygon', 'omanyte', 'omastar', 'kabuto', 'kabutops', 'aerodactyl', 'snorlax', 'articuno', 'zapdos', 'moltres', 'dratini', 'dragonair'];
   
-let pokemonEvolution1 = ['bulbasaur', 'ivysaur', 'venusaur'];
 let currentPokemon;
-let evolutionPokemon;
 let pokemonImg;
 let number = 0;
 let audio = new Audio('audio/Pokémon-Thema (Komm schnapp sie dir).m4a');
@@ -21,31 +19,7 @@ async function loadPokemon() {
       loadPokemonCards(i, currentPokemon);
   }
 }
-
-async function loadPokemonEvolution() {
-    let abc = document.getElementById('evolution');
-
-    for (let i = 2; i <= pokemonEvolution1.length; i++) { // erstes Pokemon hat keine Entwicklungsstufe
-
-        let url = `https://pokeapi.co/api/v2/pokemon-species/${i}/`;
-        let response = await fetch(url);
-        evolutionPokemon = await response.json();
-        evolutionPokemon = evolutionPokemon['evolves_from_species']['name'];
-        console.log('evolution ist', evolutionPokemon);
-
-        abc.innerHTML += `
-        <div>${evolutionPokemon}</div>
-        `;
-    }
-    }
-
-
-
-
-
-
-
-
+    
 
 async function renderPokemonInfo(index) {  // index = Zahl eines Pokemons. Damit immer die richtigen Daten geladen werden
   document.getElementById('pokedex').classList.remove('dNone');
@@ -123,7 +97,6 @@ showAbout();
 renderAbout(pokemonName);
 renderBaseStats();
 renderMoves();
-loadPokemonEvolution();
 }
 
 
@@ -317,7 +290,6 @@ function renderMoves() {
 function showAbout() {
     document.getElementById('abilities').classList.add('dNone');
     document.getElementById('moves').classList.add('dNone');
-    document.getElementById('evolution').classList.add('dNone');
     let about = document.getElementById('about');
     about.classList.remove('dNone');
 }
@@ -326,7 +298,6 @@ function showAbout() {
 function showBaseStats() {
     document.getElementById('about').classList.add('dNone');
     document.getElementById('moves').classList.add('dNone');
-    document.getElementById('evolution').classList.add('dNone');
     let baseStats = document.getElementById('abilities');
     baseStats.classList.remove('dNone');
 }
@@ -335,18 +306,8 @@ function showBaseStats() {
 function showMoves() {
     document.getElementById('about').classList.add('dNone');
     document.getElementById('abilities').classList.add('dNone');
-    document.getElementById('evolution').classList.add('dNone');
     let moves = document.getElementById('moves');
     moves.classList.remove('dNone');
-}
-
-
-function showEvolution() {
-    document.getElementById('about').classList.add('dNone');
-    document.getElementById('abilities').classList.add('dNone');
-    document.getElementById('moves').classList.add('dNone');
-    let evolutionsContainer = document.getElementById('evolution');
-    evolutionsContainer.classList.remove('dNone');
 }
 
 
