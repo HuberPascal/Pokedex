@@ -1,11 +1,13 @@
 let pokemon = [
-    'bulbasaur', 'ivysaur', 'venusaur', 'charmander', 'charmeleon', 'charizard', 'squirtle', 'wartortle', 'blastoise', 'caterpie', 'metapod', 'butterfree', 'weedle', 'kakuna', 'beedrill', 'pidgey', 'pidgeotto', 'pidgeot', 'rattata', 'raticate', 'spearow', 'fearow', 'ekans', 'arbok', 'pikachu', 'raichu', 'sandshrew', 'sandslash', 'nidoran-f', 'nidorina', 'nidoqueen', 'nidoran-m', 'nidorino', 'nidoking', 'clefairy', 'clefable', 'vulpix', 'ninetales', 'jigglypuff', 'wigglytuff', 'zubat', 'golbat', 'oddish', 'gloom', 'vileplume', 'paras', 'parasect', 'venonat', 'venomoth', 'diglett', 'dugtrio', 'meowth', 'persian', 'psyduck', 'golduck', 'mankey', 'primeape', 'growlithe', 'arcanine', 'poliwag', 'poliwhirl', 'poliwrath', 'abra', 'kadabra', 'alakazam', 'machop', 'machoke', 'machamp', 'bellsprout', 'weepinbell', 'victreebel', 'tentacool', 'tentacruel', 'geodude', 'graveler', 'golem', 'ponyta', 'rapidash', 'slowpoke', 'slowbro', 'magnemite', 'magneton', 'farfetchd', 'doduo', 'dodrio', 'seel', 'dewgong', 'grimer', 'muk', 'shellder', 'cloyster', 'gastly', 'haunter', 'gengar', 'onix', 'drowzee', 'hypno', 'krabby', 'kingler', 'voltorb', 'electrode', 'exeggcute', 'exeggutor', 'cubone', 'marowak', 'hitmonlee', 'hitmonchan', 'lickitung', 'koffing', 'weezing', 'rhyhorn', 'rhydon', 'chansey', 'tangela', 'kangaskhan', 'horsea', 'seadra', 'goldeen', 'seaking', 'staryu', 'starmie', 'mr-mime', 'scyther', 'jynx', 'electabuzz', 'magmar', 'pinsir', 'tauros', 'magikarp', 'gyarados', 'lapras', 'ditto', 'eevee', 'vaporeon', 'jolteon', 'flareon', 'porygon', 'omanyte', 'omastar', 'kabuto', 'kabutops', 'aerodactyl', 'snorlax', 'articuno', 'zapdos', 'moltres', 'dratini', 'dragonair'];
+    'bulbasaur', 'ivysaur', 'venusaur', 'charmander', 'charmeleon', 'charizard', 'squirtle', 'wartortle', 'blastoise', 'caterpie', 'metapod', 'butterfree', 'weedle', 'kakuna', 'beedrill', 'pidgey', 'pidgeotto', 'pidgeot', 'rattata', 'raticate', 'spearow', 'fearow', 'ekans', 'arbok', 'pikachu', 'raichu', 'sandshrew', 'sandslash', 'nidoran-f', 'nidorina', 'nidoqueen', 'nidoran-m',];
+    //  'nidorino', 'nidoking', 'clefairy', 'clefable', 'vulpix', 'ninetales', 'jigglypuff', 'wigglytuff', 'zubat', 'golbat', 'oddish', 'gloom', 'vileplume', 'paras', 'parasect', 'venonat', 'venomoth', 'diglett', 'dugtrio', 'meowth', 'persian', 'psyduck', 'golduck', 'mankey', 'primeape', 'growlithe', 'arcanine', 'poliwag', 'poliwhirl', 'poliwrath', 'abra', 'kadabra', 'alakazam', 'machop', 'machoke', 'machamp', 'bellsprout', 'weepinbell', 'victreebel', 'tentacool', 'tentacruel', 'geodude', 'graveler', 'golem', 'ponyta', 'rapidash', 'slowpoke', 'slowbro', 'magnemite', 'magneton', 'farfetchd', 'doduo', 'dodrio', 'seel', 'dewgong', 'grimer', 'muk', 'shellder', 'cloyster', 'gastly', 'haunter', 'gengar', 'onix', 'drowzee', 'hypno', 'krabby', 'kingler', 'voltorb', 'electrode', 'exeggcute', 'exeggutor', 'cubone', 'marowak', 'hitmonlee', 'hitmonchan', 'lickitung', 'koffing', 'weezing', 'rhyhorn', 'rhydon', 'chansey', 'tangela', 'kangaskhan', 'horsea', 'seadra', 'goldeen', 'seaking', 'staryu', 'starmie', 'mr-mime', 'scyther', 'jynx', 'electabuzz', 'magmar', 'pinsir', 'tauros', 'magikarp', 'gyarados', 'lapras', 'ditto', 'eevee', 'vaporeon', 'jolteon', 'flareon', 'porygon', 'omanyte', 'omastar', 'kabuto', 'kabutops', 'aerodactyl', 'snorlax', 'articuno', 'zapdos', 'moltres', 'dratini', 'dragonair'];
   
 
 let currentPokemon;
 let pokemonImg;
 let number = 0;
 let audio = new Audio('audio/Pokémon-Thema (Komm schnapp sie dir).m4a');
+
 
 async function loadPokemon() {
   for (let i = 0; i < pokemon.length; i++) {
@@ -39,6 +41,12 @@ async function renderPokemonInfo(index) {  // index = Zahl eines Pokemons. Damit
 
   let pokemonImage = document.getElementById('pokemonImg');
   pokemonImage.src = pokemonImg['sprites']['other']['official-artwork']['front_default'];
+
+  let goNextImg = document.getElementById('goNextImg');
+  goNextImg.innerHTML = `
+    <img id="goLeft" onclick="goLeft(${index})" class="linkerPfeil imghover" src="./img/linker-pfeil.png" alt="">
+    <img id="goRight" onclick="goRight(${index})" class="rechterPfeil imghover" src="./img/rechter-pfeil.png" alt="">
+  `;
 
 //   renderMoves(pokemonImg);
 
@@ -304,4 +312,70 @@ function showMoves() {
 }
 
 
+async function goLeft(index) {
+    if(index > 0) {
+        index = index - 1;
+        renderPokemonInfo(index);
+    }
 
+    if(index > 0) {
+        renderPokemonInfo(index);
+    } else {
+        await renderPokemonInfo(index);
+        hiddenGoLeft();
+    }
+}
+
+
+async function goRight(index) {
+    if(index < pokemon.length -1) {
+        index = index + 1
+        renderPokemonInfo(index);
+    }
+
+    if(index < pokemon.length -1) {
+        renderPokemonInfo(index);
+    } else {
+        await renderPokemonInfo(index);
+        hiddenGoRight();
+    }
+}
+
+
+function hiddenGoRight() {
+    document.getElementById('goRight').classList.add('dNone');
+}
+
+function hiddenGoLeft() {
+    document.getElementById('goLeft').classList.add('dNone');
+}
+
+
+// if(imgSeries < images.length -1) {
+//     i = imgSeries + 1;
+// }else {
+//     // i = 0;
+// }
+
+// if(imgSeries < images.length -2) {
+//     openImage(i);
+// }else {
+//     openImage(i);
+//     hiddenGoRight();
+// }
+
+
+// function goLeft() {
+//     if(imgSeries > 0) {
+//         i = imgSeries - 1;
+//     }else {
+//         // i = images.length - 1;
+//     }
+
+//     if(imgSeries > 1) {
+//         openImage(i);
+//     }else {
+//         openImage(i);
+//         hiddenGoLeft();
+//     }
+// }
