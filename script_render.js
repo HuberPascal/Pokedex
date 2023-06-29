@@ -46,5 +46,80 @@ function renderPokemonCardsWithSecondTyps(index, pokemonName, types, typesSecond
     <img id="goRight" onclick="goRight(${index})" class="rechterPfeil imghover" src="./img/rechter-pfeil.png" alt="">
   `;
   }
+
+
+  function renderFirstAndSecondTypsInfoCard(types, typesSecond) {
+    return `
+    <div class="pokemonTypeInfo">
+        <b>${types}</b>
+    </div>
+    <div class="pokemonTypeSecondInfo">
+        <b>${typesSecond}</b>
+    <div>
+`;
+  }
+
+
+  function renderOnlyFirstTypInfoCard(types) {
+    return `
+    <div class="pokemonTypeInfo">
+        <b>${types}</b>
+    </div>   
+`;
+  }
+
+
+  function renderPokemonNumber(pokemonNumber) {
+    return `
+    <div class"pokemonNumber">#00${pokemonNumber}</div>
+  `;
+  }
+
+
+  function renderBaseStatsHTML(statsName, baseStat, progressBarClass) {
+    return `
+    <div class="flex">
+        <p>${statsName}</p>
+        <span>${baseStat}</span>
+        <div class="progressInfo">
+            <div class="progress" role="progressbar" aria-label="Erfolgsbeispiel" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100">
+                <div class="progress-bar ${progressBarClass}" style="width: ${baseStat}%"></div>
+            </div>
+        </div>
+    </div>
+`;
+  }
+
+
+  function renderAboutHTML(pokemonName, height, weight, abilities1, abilities2) {
+    return `
+    <div>
+        <div class="aboutSection">
+            <p>Species</p>
+            <p>${pokemonName}</p>
+        </div>
+        <div class="aboutSection">
+            <p>Height</p>
+            <p>${height}0cm</p>
+        </div>
+        <div class="aboutSection">
+            <p>Weight</p>
+            <p>${weight}kg</p>
+        </div>
+        <div class="aboutSection">
+            <p>Abilities</p>
+            <p class="infoWidth">${abilities1}, ${abilities2}</p>
+        </div>
+    </div>
+    `;
+  }
   
+
+  function renderMovesHTML(pokemonAPI) {
+    return `
+    <div class="movesCards">
+        <p>${pokemonAPI}</p>
+    </div>
+    `;
+  }
   

@@ -1,21 +1,26 @@
 
-  
+async function init() {
+    for (let i = 0; i < amountsShowing; i++) {
+        await loadPokemon(i);
+    }
+}
 
-async function loadPokemon() {
-  for (let i = 0; i < pokemon.length; i++) {
-      const pokemonName = pokemon[i];
+
+async function loadPokemon(i) {
+//   for (let i = 0; i < pokemon.length; i++) {
+      let pokemonName = pokemon[i];
 
       let url = `https://pokeapi.co/api/v2/pokemon/${pokemonName}`;
       let response = await fetch(url);
       currentPokemon = await response.json();
       console.log(currentPokemon);
       loadPokemonCards(i, currentPokemon, pokemon);
-  }
+  
 }
     
 
 //////////// render Funktion Startseite
-function loadPokemonCards(index, currentPokemon) {   // i ist ab jetzt index. i hat immer den Wert eines Pokemons
+function loadPokemonCards(index, currentPokemon) {   // "i" ist ab jetzt "index". "i" hat immer den Wert eines Pokemons
     let cardsArea = document.getElementById('cardsArea');
     let pokemonName = pokemon[index];
     pokemonName = pokemonName.charAt(0).toUpperCase() + pokemonName.slice(1);
@@ -39,56 +44,23 @@ async function renderPokemonInfo(index) {  // index = Zahl eines Pokemons. Damit
   document.getElementById('pokedexInfoArea').classList.remove('dNone');
   document.getElementById('overlay').classList.remove('dNone');
 
-//  loadPokemonApiInfo(index);
   let pokemonNameContainer = document.getElementById('pokemonName');
   let pokemonName = pokemon[index];
   pokemonName = pokemonName.charAt(0).toUpperCase() + pokemonName.slice(1);
   pokemonNameContainer.innerHTML = pokemonName;
   
-
   let pokemonKlein = pokemon[index];
   let url = `https://pokeapi.co/api/v2/pokemon/${pokemonKlein}`;
   let response = await fetch(url);
   pokemonAPI = await response.json();
 
-
   let pokemonImage = document.getElementById('pokemonImg');
   pokemonImage.src = pokemonAPI['sprites']['other']['official-artwork']['front_default'];
-
-  
 
   let pokemonNumber = pokemonAPI['id'];
   let pokemonNumberContainer = document.getElementById('pokemonNumber');
   pokemonNumberContainer.innerHTML = '';
-  pokemonNumberContainer.innerHTML += `
-    <div class"pokemonNumber">#00${pokemonNumber}</div>
-  `;
-
-//   renderPokemonAbilities(typesSecond, pokemonAPI) 
-// let pokedexInfoAbilities = document.getElementById('pokedexInfoAbilities');
-//   let types = pokemonAPI['types'][0]['type']['name'];
-//   document.getElementById('pokedex').classList = '';
-//   document.getElementById('pokedex').classList.add(types);
-//   pokedexInfoAbilities.innerHTML = '';
-
-//   if (pokemonAPI['types'].length >= 2) {
-//     typesSecond = pokemonAPI['types'][1]['type']['name'];
-//     pokedexInfoAbilities.innerHTML += `
-//                 <div class="pokemonTypeInfo">
-//                     <b>${types}</b>
-//                 </div>
-//                 <div class="pokemonTypeSecondInfo">
-//                     <b>${typesSecond}</b>
-//                 <div>
-//     `;
-// } else {
-//     pokedexInfoAbilities.innerHTML += `
-//                 <div class="pokemonTypeInfo">
-//                     <b>${types}</b>
-//                 </div>   
-//     `;
-// }
-
+  pokemonNumberContainer.innerHTML += renderPokemonNumber(pokemonNumber);
 
 renderPokemonAbilities(pokemonAPI);
 showAbout();
@@ -96,7 +68,6 @@ renderAbout(pokemonName);
 renderBaseStats();
 renderMoves();
 goNextImg(index);
-
 }
 
 
@@ -115,30 +86,17 @@ function goNextImg(index) {
 
 
   function renderPokemonAbilities(pokemonAPI) { 
-    console.log('das ist das Pokemon', pokemonAPI);
     let pokedexInfoAbilities = document.getElementById('pokedexInfoAbilities');
-    // console.log('das ist das Pokemon', pokemonAPI);
-  let types = pokemonAPI['types'][0]['type']['name'];
-  document.getElementById('pokedex').classList = '';
-  document.getElementById('pokedex').classList.add(types);
-  pokedexInfoAbilities.innerHTML = '';
+    let types = pokemonAPI['types'][0]['type']['name'];
+    document.getElementById('pokedex').classList = '';
+    document.getElementById('pokedex').classList.add(types);
+    pokedexInfoAbilities.innerHTML = '';
 
-  if (pokemonAPI['types'].length >= 2) {
-    typesSecond = pokemonAPI['types'][1]['type']['name'];
-    pokedexInfoAbilities.innerHTML += `
-                <div class="pokemonTypeInfo">
-                    <b>${types}</b>
-                </div>
-                <div class="pokemonTypeSecondInfo">
-                    <b>${typesSecond}</b>
-                <div>
-    `;
-} else {
-    pokedexInfoAbilities.innerHTML += `
-                <div class="pokemonTypeInfo">
-                    <b>${types}</b>
-                </div>   
-    `;
+    if (pokemonAPI['types'].length >= 2) {
+        typesSecond = pokemonAPI['types'][1]['type']['name'];
+        pokedexInfoAbilities.innerHTML += renderFirstAndSecondTypsInfoCard(types, typesSecond);
+    } else {
+        pokedexInfoAbilities.innerHTML += renderOnlyFirstTypInfoCard(types);
 }
 }
 
@@ -165,33 +123,15 @@ function renderBaseStats() {
 
       let progressBarClass = baseStat > 50 ? 'bg-success' : 'bg-danger';
 
-      abilities.innerHTML += `
-          <div class="flex">
-              <p>${statsName}</p>
-              <span>${baseStat}</span>
-              <div class="progressInfo">
-                  <div class="progress" role="progressbar" aria-label="Erfolgsbeispiel" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100">
-                      <div class="progress-bar ${progressBarClass}" style="width: ${baseStat}%"></div>
-                  </div>
-              </div>
-          </div>
-      `;
+      abilities.innerHTML += renderBaseStatsHTML(statsName, baseStat, progressBarClass);
   }
 }
-
-
-
-
-
-
-
 
 
 function renderAbout(pokemonName) {
     document.getElementById('abilities').classList.add('dNone');
     document.getElementById('moves').classList.add('dNone');
     
-
     let height = pokemonAPI['height'];
     let weight = pokemonAPI['weight'];
     weight = (weight / 10).toFixed(1);
@@ -199,29 +139,8 @@ function renderAbout(pokemonName) {
     // überprüfen ob zwei "ability" vorhanden sind. links oder rechts wird ausgeführt
     let abilities2 = pokemonAPI['abilities'][1] ? pokemonAPI['abilities'][1]['ability']['name'] : '';
 
-
-
     about.innerHTML = '';
-    about.innerHTML = `
-    <div>
-        <div class="aboutSection">
-            <p>Species</p>
-            <p>${pokemonName}</p>
-        </div>
-        <div class="aboutSection">
-            <p>Height</p>
-            <p>${height}0cm</p>
-        </div>
-        <div class="aboutSection">
-            <p>Weight</p>
-            <p>${weight}kg</p>
-        </div>
-        <div class="aboutSection">
-            <p>Abilities</p>
-            <p class="infoWidth">${abilities1}, ${abilities2}</p>
-        </div>
-    </div>
-    `;
+    about.innerHTML = renderAboutHTML(pokemonName, height, weight, abilities1, abilities2);
 }
 
 
@@ -254,6 +173,7 @@ function playMusic() {
     }
 }
 
+
 function noneMusic() {
     document.getElementById('overlayStartContainer').classList.remove('overlay');
     document.getElementById('musicConfirmation').classList.add('dNone');
@@ -265,6 +185,7 @@ function startAnimateImage() {
     animateImage.classList.add('zoomed');
 }
 
+
 function stopAnimateImage() {
     const animateImage = document.getElementById('animateImage');
     animateImage.classList.remove('zoomed');
@@ -273,17 +194,12 @@ function stopAnimateImage() {
 
 function renderMoves() { 
     let pokemonMoves = pokemonAPI['moves'];
-    // moves.innerHTML ='';
+    moves.innerHTML ='';
 
     for (let i = 0; i < pokemonMoves.length; i++) {
         if(pokemonMoves[i]['move']['name'])
-        // const element = pokemonMoves[i];
         pokemonAPI = pokemonMoves[i]['move']['name'];
-        moves.innerHTML += `
-        <div class="movesCards">
-            <p>${pokemonAPI}</p>
-        </div>
-        `;
+        moves.innerHTML += renderMovesHTML(pokemonAPI);
     }
 }
 
@@ -342,13 +258,29 @@ function goRight(index) {
 }
 
 
-
 function hiddenGoRight() {
     document.getElementById('goRight').classList.add('dNone');
 }
+
 
 function hiddenGoLeft() {
     document.getElementById('goLeft').classList.add('dNone');
 }
 
+
+async function loadMore() {
+    amountsShowing += +50;
+    let load = amountsShowing - 50;
+
+    if(amountsShowing >= 151) {
+        document.getElementById('loadMoreBtn').classList.add('dNone');
+        for (let i = load; i < amountsShowing; i++) {
+            await loadPokemon(i);
+        }
+    } else {
+        for (let i = load; i < amountsShowing; i++) {
+            await loadPokemon(i);
+        }
+    }
+}
 

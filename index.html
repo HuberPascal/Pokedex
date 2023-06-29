@@ -4,16 +4,11 @@
         <meta charset="UTF-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         <link rel="stylesheet" href="style.css" />
+        <link rel="stylesheet" href="fonts.css">
         <script src="script.js"></script>
         <script src="script_data.js"></script>
         <script src="script_render.js"></script>
-        <script src="script_API.js"></script>
-        <link rel="preconnect" href="https://fonts.googleapis.com" />
-        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-        <link
-            href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;500;600;700;800&display=swap"
-            rel="stylesheet"
-        />
+
 
         <!-- Bootstrap files -->
         <link
@@ -31,7 +26,7 @@
         <title>Pokedex</title>
         <link rel="icon" type="image/x-icon" href="./img/pokeball.png" />
     </head>
-    <body onload="loadPokemon()">
+    <body onload="init()">
         <header>
             <img src="./img/pokeball(2).png" alt="">
             <h1>Pokedex</h1>
@@ -40,6 +35,9 @@
 
 
         <div id="cardsArea"></div>
+        <div id="loadMoreBtn">
+            <button onclick="loadMore()">load more</button>
+        </div>
 
         <div id="overlay" class="dNone"></div>
 

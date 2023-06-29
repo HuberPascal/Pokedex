@@ -1,12 +1,11 @@
 
 body {
     margin: 0;
-    font-family: 'Open Sans', sans-serif;
+    font-family: 'Roboto' !important;
     display: flex;
     justify-content: center;
     flex-direction: column;
     background-image: url(./img/5073414.jpg);
-    /* background-repeat: no-repeat; */
     background-size: contain;
 }
 
@@ -82,6 +81,7 @@ header img {
 
 .pokedexHeadImg img {
     height: 40px;
+    cursor: pointer;
 }
 
 nav {
@@ -98,6 +98,7 @@ nav ul {
 
 ul li {
     margin-right: 20px;
+    cursor: pointer;
 }
 
 .progressInfo {
@@ -122,7 +123,7 @@ ul li {
 .flex p {
     margin: 4px;
     width: 140px;
-    color: rgba(0, 0, 0, 0.5);
+    /* color: rgba(0, 0, 0, 0.5); */
     
 }
 
@@ -359,6 +360,29 @@ ul li {
   background-color: rgba(0, 0, 0, 0.4);
   border-radius: 50%;
   cursor: pointer;
+}
+
+#loadMoreBtn {
+  display: flex;
+  justify-content: center;
+  margin: 16px;
+}
+
+#loadMoreBtn button {
+  margin: 8px;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 4px;
+    font-size: 16px;
+    font-weight: bold;
+    background-color: #4caf50;
+    color: #ffffff;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+#loadMoreBtn button:hover {
+background-color: #45a049;
 }
 
 .water {
