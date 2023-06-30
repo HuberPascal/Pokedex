@@ -1,0 +1,157 @@
+
+@media(max-width: 960px) {
+.musicConfirmation h3 {
+    font-size: 24px !important;
+}
+}
+
+@media(max-width: 740px) {
+    .musicConfirmation {
+        padding: 12px 20px;
+    }
+    .musicConfirmation h3 {
+        font-size: 20px !important;
+        flex-wrap: nowrap;
+        min-width: 300px;
+    }
+}
+
+@media(max-width: 640px) {
+    .info-container {
+        width: 530px;
+    }
+    #pokemonBackgroundImg {
+        left: 160px;
+        transform: scale(1.5) !important;
+    }
+    .rechterPfeil {
+        right: 15px;
+    }
+    .linkerPfeil {
+        left: 15px;
+    }
+}
+
+@media(max-width: 550px) {
+    .info-container {
+        width: 480px;
+    }
+    #pokemonBackgroundImg {
+        left: 140px;
+        transform: scale(1.4) !important;
+    }
+    #pokemonImg {
+        height: 320px;
+        width: 320px;
+    }
+}
+
+@media(max-width: 500px) {
+    .info-container {
+        width: 480px;
+    }
+}
+
+@media(max-width: 500px) {
+    .info-container {
+        width: 430px;
+    }
+    #pokemonBackgroundImg {
+        left: 115px;
+        transform: scale(1.3) !important;
+    }
+    #pokemonImg {
+        height: 320px;
+        width: 320px;
+    }
+    .rechterPfeil {
+        right: 5px;
+        height: 45px;
+    }
+    .linkerPfeil {
+        left: 5px;
+        height: 45px;
+    }
+}
+
+@media(max-width: 450px) {
+    .info-container {
+        width: 380px;
+    }
+    #pokemonBackgroundImg {
+        left: 80px;
+        top: 200px;
+        transform: scale(1.1) !important;
+    }
+    #pokemonImg {
+        height: 280px;
+        width: 280px;
+    }
+    .rechterPfeil {
+        right: 5px;
+    }
+    .linkerPfeil {
+        left: 5px;
+    }
+}
+
+@media(max-width: 400px) {
+    .info-container {
+        width: 360px;
+    }
+    #pokemonBackgroundImg {
+        left: 60px;
+        top: 160px;
+        transform: scale(0.9) !important;
+    }
+    #pokemonImg {
+        height: 230px;
+        width: 230px;
+        top: 40%;
+    }
+    p {
+        font-size: 15px;
+    }
+    .infoWidth {
+        width: 170px;
+    }
+    .flex p {
+        width: 155px;
+    }
+    .flex span {
+        font-size: 15px;
+    }
+    .pokedexInfoArea {
+        top: 2%;
+        bottom: 2%;
+    }
+    .rechterPfeil {
+        top: 44%;
+    }
+    .linkerPfeil {
+        top: 44%;
+    }
+    .parent-container {
+        top: -115px;
+    }
+}
+
+
+@media(max-width: 390px) {
+    #pokemonBackgroundImg {
+        left: 60px;
+        top: 180px;
+        transform: scale(0.9) !important;
+    }
+    #pokemonImg {
+        height: 230px;
+        width: 230px;
+        top: 41%;
+    }    
+    .rechterPfeil {
+        top: 45%;
+    }
+    .linkerPfeil {
+        top: 45%;
+    }
+}

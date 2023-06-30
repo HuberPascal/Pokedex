@@ -96,15 +96,15 @@ function renderPokemonCardsWithSecondTyps(index, pokemonName, types, typesSecond
     <div>
         <div class="aboutSection">
             <p>Species</p>
-            <p>${pokemonName}</p>
+            <p class="infoWidth">${pokemonName}</p>
         </div>
         <div class="aboutSection">
             <p>Height</p>
-            <p>${height}0cm</p>
+            <p class="infoWidth">${height}0cm</p>
         </div>
         <div class="aboutSection">
             <p>Weight</p>
-            <p>${weight}kg</p>
+            <p class="infoWidth">${weight}kg</p>
         </div>
         <div class="aboutSection">
             <p>Abilities</p>
@@ -123,3 +123,10 @@ function renderPokemonCardsWithSecondTyps(index, pokemonName, types, typesSecond
     `;
   }
   
+  function likeHearts(index) {
+    return `
+    <div class="pokedexHeadImg">
+        <img onclick="likeBtn(${index})" id="likeBtn" src="./img/herz(3).png" alt="">
+    </div>
+    `;
+  }

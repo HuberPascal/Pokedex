@@ -5,8 +5,6 @@ body {
     display: flex;
     justify-content: center;
     flex-direction: column;
-    background-image: url(./img/5073414.jpg);
-    background-size: contain;
 }
 
 h1 {
@@ -34,13 +32,23 @@ header img {
   width: 50px;
 }
 
+.wrapper {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-image: url(./img/5073414.jpg);
+  background-size: contain;
+  z-index: -1;
+}
+
 .cursor {
   cursor: pointer;
 }
 
 #pokedex {
     min-height: 55vh;
-    /* background-color: #FB6C6C; */
     color: white;
     padding: 24px;
     border-radius: 16px;
@@ -59,7 +67,7 @@ header img {
     border-radius: 40px 40px 16px 16px;
     margin-top: -40px;
     padding-bottom: 30px;
-    min-height: 100px;
+    min-height: 300px;
     width: 600px;
     padding: 16px 32px;
 } 
@@ -82,10 +90,6 @@ header img {
 .pokedexHeadImg img {
     height: 40px;
     cursor: pointer;
-}
-
-nav {
-   
 }
 
 nav ul {
@@ -123,14 +127,12 @@ ul li {
 .flex p {
     margin: 4px;
     width: 140px;
-    /* color: rgba(0, 0, 0, 0.5); */
-    
+    /* color: rgba(0, 0, 0, 0.5); */ 
 }
 
 .flex span {
     width: 50px;
 }
-
 
 #cards {
     height: 150px;
@@ -153,8 +155,6 @@ ul li {
   bottom: 12px;
   opacity: 0.2;
 }
-
-
 
 #cards h2 {
     font-size: 20px !important; 
@@ -188,7 +188,7 @@ ul li {
 }
 
 .pokemonTypeInfo b {
-  font-size: 12px;
+  font-size: 14px;
   font-weight: 500;
 }
 
@@ -215,7 +215,7 @@ ul li {
 }
 
 .pokemonTypeSecondInfo b {
-  font-size: 12px;
+  font-size: 14px;
   font-weight: 500;
 }
 
@@ -253,16 +253,8 @@ ul li {
   width: 250px !important;
 }
 
-#about {
-  height: 200px;
-}
-
-#abilities {
-  height: 200px;
-}
-
 #moves {
-  height: 200px;
+  max-height: 200px;
   display: flex;
   flex-wrap: wrap;
   overflow: scroll;
@@ -279,17 +271,8 @@ ul li {
   align-items: center;
 }
 
-.zoomed {
-  animation: zoomAnimation 1s infinite alternate;
-}
-
-@keyframes zoomAnimation {
-  0% {
-    transform: scale(1);
-  }
-  100% {
-    transform: scale(1.1);
-  }
+.movesCards {
+  height: 35px;
 }
 
 #overlay {
@@ -385,6 +368,75 @@ ul li {
 background-color: #45a049;
 }
 
+.parent-container {
+  position: relative;
+  top: -155px;
+}
+
+.fixed {
+  position: fixed;
+}
+  
+  /*---------- Button visit Site ----------*/
+
+  .musicConfirmation {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: #ffffff;
+    padding: 20px;
+    border-radius: 8px;
+    text-align: center;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  }
+  
+  .musicConfirmation h3 {
+    margin-bottom: 16px;
+  }
+  
+  .buttonContainer {
+    display: flex;
+  }
+  
+  .buttonContainer button {
+    margin: 8px;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 4px;
+    font-size: 16px;
+    font-weight: bold;
+    background-color: #4caf50;
+    color: #ffffff;
+    cursor: pointer;
+    transition: background-color 0.3s;
+  }
+  
+  .buttonContainer button:hover {
+    background-color: #45a049;
+  }
+
+  /*---------- Zoom Img ----------*/
+
+  .zoomed {
+    animation: zoomAnimation 1s infinite alternate;
+  }
+  
+  @keyframes zoomAnimation {
+    0% {
+      transform: scale(1);
+    }
+    100% {
+      transform: scale(1.1);
+    }
+  }
+
+  /*---------- Card Background ----------*/
+
 .water {
   background: linear-gradient(to bottom right, #75BEFE, #B0D9FF);
   }
@@ -452,51 +504,3 @@ background-color: #45a049;
   .dragon {
     background: linear-gradient(to bottom right, #AFA0F6, #7C63E7);
   }
-  
-  
-
-  
-
-  /*---------- Button visit Site ----------*/
-
-  .musicConfirmation {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    position: fixed;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    background-color: #ffffff;
-    padding: 20px;
-    border-radius: 8px;
-    text-align: center;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-  }
-  
-  .musicConfirmation h3 {
-    margin-bottom: 16px;
-  }
-  
-  .buttonContainer {
-    display: flex;
-  }
-  
-  .buttonContainer button {
-    margin: 8px;
-    padding: 10px 20px;
-    border: none;
-    border-radius: 4px;
-    font-size: 16px;
-    font-weight: bold;
-    background-color: #4caf50;
-    color: #ffffff;
-    cursor: pointer;
-    transition: background-color 0.3s;
-  }
-  
-  .buttonContainer button:hover {
-    background-color: #45a049;
-  }
-  

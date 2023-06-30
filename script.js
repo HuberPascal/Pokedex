@@ -43,6 +43,7 @@ async function renderPokemonInfo(index) {  // index = Zahl eines Pokemons. Damit
   document.getElementById('pokedex').classList.remove('dNone');
   document.getElementById('pokedexInfoArea').classList.remove('dNone');
   document.getElementById('overlay').classList.remove('dNone');
+  let overlay = document.getElementById('overlay');
 
   let pokemonNameContainer = document.getElementById('pokemonName');
   let pokemonName = pokemon[index];
@@ -61,6 +62,9 @@ async function renderPokemonInfo(index) {  // index = Zahl eines Pokemons. Damit
   let pokemonNumberContainer = document.getElementById('pokemonNumber');
   pokemonNumberContainer.innerHTML = '';
   pokemonNumberContainer.innerHTML += renderPokemonNumber(pokemonNumber);
+
+    let likeHeart = document.getElementById('likeHeart');
+    likeHeart.innerHTML = likeHearts(index);
 
 renderPokemonAbilities(pokemonAPI);
 showAbout();
@@ -144,7 +148,9 @@ function renderAbout(pokemonName) {
 }
 
 
-function likeBtn() {
+
+
+function likeBtn(index) {
     let likeBtn = document.getElementById('likeBtn').src;
     if(likeBtn.indexOf('img/herz(3).png') != -1) {
         document.getElementById('likeBtn').src = 'img/herz(4).png';
@@ -157,6 +163,7 @@ function likeBtn() {
 function goBack() {
     document.getElementById('pokedexInfoArea').classList.add('dNone');
     document.getElementById('overlay').classList.add('dNone');
+    document.body.classList.remove('fixed');
 }
 
 
