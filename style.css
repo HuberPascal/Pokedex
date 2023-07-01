@@ -18,18 +18,28 @@ h3 {
 
 header {
   display: flex;
-  justify-content: center;
+  justify-content: space-between;
   align-items: center;
-  background-color: lightgray;
   gap: 16px;
   margin-bottom: 24px;
   padding: 10px;
   font-size: 32px;
+  margin: 0 30px;
 }
 
 header img {
   height: 50px;
   width: 50px;
+}
+
+.flex-center {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.header-container {
+  width: 300px;
 }
 
 .wrapper {
@@ -39,12 +49,68 @@ header img {
   width: 100%;
   height: 100%;
   background-image: url(./img/5073414.jpg);
-  background-size: contain;
+  background-size: cover;
   z-index: -1;
 }
 
 .cursor {
   cursor: pointer;
+}
+
+#search {
+  width: 300px;
+  height: 40px;
+  padding: 10px;
+  font-size: 16px;
+  border: none;
+  border-radius: 5px;
+  background-color: #f2f2f2;
+  color: #333;
+  outline: none;
+}
+
+#search::placeholder {
+  color: #999;
+}
+
+#searchResponsive {
+  width: 300px;
+  height: 40px;
+  padding: 10px;
+  font-size: 16px;
+  border: none;
+  border-radius: 5px;
+  background-color: #f2f2f2;
+  color: #333;
+  outline: none;
+}
+
+#searchResponsive::placeholder {
+  color: #999;
+}
+
+#inputField {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 16px;
+}
+
+.flexLupe {
+  display: flex !important;
+  justify-content: flex-end;
+  filter: invert(100%);
+}
+
+.flexLupe img {
+  height: 30px;
+  width: 30px;
+}
+
+
+.pokedexLogo {
+  height: 100px;
+  width: 200px;
+  margin: 0 auto;
 }
 
 #pokedex {

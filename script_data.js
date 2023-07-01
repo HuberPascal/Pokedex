@@ -7,6 +7,7 @@ let currentPokemon;
 let pokemonImg;
 let pokemonName;
 let loading = false; // Variable zum Überprüfen, ob bereits ein Ladevorgang ausgeführt wird
+let isInputFieldShown = false;
 let number = 0;
 let amountsShowing = 51;
 let audio = new Audio('./audio/Pokémon-Theme-Song.m4a');

@@ -313,3 +313,63 @@ async function loadMore() {
     loading = false; // Setzen der Ladevariable auf "false", um anzuzeigen, dass der Ladevorgang abgeschlossen ist
 }
 
+
+function filter() {
+    let search = document.getElementById('search').value;
+    search = search.toLowerCase();
+    console.log(search);
+
+    let list = document.getElementById('cardsArea');
+    list.innerHTML = '';
+
+    for (let i = 0; i < pokemon.length; i++) {
+        let name = pokemon[i];
+        if(name.toLowerCase().includes(search)) {
+            let indexOfSearch = pokemon.indexOf(name);
+            loadPokemon(indexOfSearch);
+        }
+    }
+}
+
+function filterResponsive() {
+    let search = document.getElementById('searchResponsive').value;
+    search = search.toLowerCase();
+    console.log(search);
+
+    let list = document.getElementById('cardsArea');
+    list.innerHTML = '';
+
+    for (let i = 0; i < pokemon.length; i++) {
+        let name = pokemon[i];
+        if(name.toLowerCase().includes(search)) {
+            let indexOfSearchResponsive = pokemon.indexOf(name);
+            loadPokemon(indexOfSearchResponsive);
+        }
+    }
+}
+
+
+async function showInputField() {
+    if (isInputFieldShown) {
+        return; // Die Funktion wird beendet, wenn das Input-Feld bereits geöffnet ist
+    }
+
+    isInputFieldShown = true;
+    let searchResponsive = document.getElementById('searchResponsive');
+    let InputField = document.getElementById('inputField');
+    let cardsArea = document.getElementById('cardsArea');
+
+    if (searchResponsive) {
+        InputField.innerHTML = '';
+        cardsArea.innerHTML = '';
+        await init();
+        isInputFieldShown = false; // Das Input-Feld wurde geschlossen, daher wird der Status auf "false" gesetzt
+    } else {
+        InputField.innerHTML = `
+            <div>
+                <input placeholder="Pokemon suchen ..." id="searchResponsive" onkeyup="filterResponsive()" type="text">
+            </div>
+        `;
+        isInputFieldShown = false; // Das Input-Feld wurde geöffnet, daher wird der Status auf "true" gesetzt
+    }
+}

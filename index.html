@@ -28,15 +28,26 @@
     </head>
     <body onload="init()">
         <header>
-            <img src="./img/pokeball(2).png" alt="">
-            <h1>Pokedex</h1>
-            <img id="animateImage" class="cursor" onclick="playMusic(), animateImage()" src="./img/lautsprecher(2).png" alt="">
+            <div class="header-container">
+                <img id="animateImage" class="cursor" onclick="playMusic(), animateImage()" src="./img/lautsprecher(2).png" alt="">
+            </div>
+            <div class="header-container flex-center">
+                <img class="pokedexLogo" src="./img/logo.png" alt="">
+            </div>
+            <div class="header-container lupe">
+                <input placeholder="Pokemon suchen ..." id="search" onkeyup="filter()" type="text">
+            </div>
+            <div class="header-container dNone searchIcon">
+                <div class="flexLupe">
+                    <img class="cursor" onclick="showInputField()" src="./img/lupe.png" alt="">
+                </div>
+            </div>
         </header>
 
         <div class="wrapper" id="wrapper"></div>
 
-
-        <div id="cardsArea"></div>
+        <div id="inputField"></div>
+        <div id="cardsArea"></div> 
         <div id="loadMoreBtn">
             <button onclick="loadMore()">load more</button>
             <img onclick="scrollToTop()" class="goUp" src="./img/pfeil-nach-oben.png" alt="">
