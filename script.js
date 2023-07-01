@@ -7,15 +7,12 @@ async function init() {
 
 
 async function loadPokemon(i) {
-//   for (let i = 0; i < pokemon.length; i++) {
       let pokemonName = pokemon[i];
 
       let url = `https://pokeapi.co/api/v2/pokemon/${pokemonName}`;
       let response = await fetch(url);
       currentPokemon = await response.json();
-      console.log(currentPokemon);
       loadPokemonCards(i, currentPokemon, pokemon);
-  
 }
     
 
@@ -32,7 +29,6 @@ function loadPokemonCards(index, currentPokemon) {   // "i" ist ab jetzt "index"
         typesSecond = currentPokemon['types'][1]['type']['name'];
         // index = Zahl eines Pokemons
         cardsArea.innerHTML += renderPokemonCardsWithSecondTyps(index, pokemonName, types, typesSecond, pokemonImageSrc);
-    
     } else {
         cardsArea.innerHTML += renderPokemonCardsWithOneTyp(index, pokemonName, types, pokemonImageSrc);
     }
@@ -40,38 +36,54 @@ function loadPokemonCards(index, currentPokemon) {   // "i" ist ab jetzt "index"
   
 
 async function renderPokemonInfo(index) {  // index = Zahl eines Pokemons. Damit immer die richtigen Daten geladen werden
-  document.getElementById('pokedex').classList.remove('dNone');
-  document.getElementById('pokedexInfoArea').classList.remove('dNone');
-  document.getElementById('overlay').classList.remove('dNone');
-  let overlay = document.getElementById('overlay');
-
-  let pokemonNameContainer = document.getElementById('pokemonName');
-  let pokemonName = pokemon[index];
-  pokemonName = pokemonName.charAt(0).toUpperCase() + pokemonName.slice(1);
-  pokemonNameContainer.innerHTML = pokemonName;
+    showPokemonInfoCard();
+    loadPokemonName(index);
   
-  let pokemonKlein = pokemon[index];
-  let url = `https://pokeapi.co/api/v2/pokemon/${pokemonKlein}`;
-  let response = await fetch(url);
-  pokemonAPI = await response.json();
-
-  let pokemonImage = document.getElementById('pokemonImg');
-  pokemonImage.src = pokemonAPI['sprites']['other']['official-artwork']['front_default'];
-
-  let pokemonNumber = pokemonAPI['id'];
-  let pokemonNumberContainer = document.getElementById('pokemonNumber');
-  pokemonNumberContainer.innerHTML = '';
-  pokemonNumberContainer.innerHTML += renderPokemonNumber(pokemonNumber);
+    let pokemonKlein = pokemon[index];
+    let url = `https://pokeapi.co/api/v2/pokemon/${pokemonKlein}`;
+    let response = await fetch(url);
+    pokemonAPI = await response.json();
+    loadPokemonImgFromApi();
+    loadPokemonId();
 
     let likeHeart = document.getElementById('likeHeart');
     likeHeart.innerHTML = likeHearts(index);
 
-renderPokemonAbilities(pokemonAPI);
-showAbout();
-renderAbout(pokemonName);
-renderBaseStats();
-renderMoves();
-goNextImg(index);
+    renderPokemonAbilities(pokemonAPI);
+    renderAbout();
+    renderBaseStats();
+    renderMoves();
+}
+
+
+function showPokemonInfoCard() {
+    document.getElementById('pokedex').classList.remove('dNone');
+    document.getElementById('pokedexInfoArea').classList.remove('dNone');
+    document.getElementById('overlay').classList.remove('dNone');
+}
+
+
+function loadPokemonName(index) {
+    let pokemonNameContainer = document.getElementById('pokemonName');
+    pokemonName = pokemon[index];
+    pokemonName = pokemonName.charAt(0).toUpperCase() + pokemonName.slice(1);
+    pokemonNameContainer.innerHTML = pokemonName;
+    showAbout();
+    goNextImg(index);
+}
+
+
+function loadPokemonImgFromApi() {
+    let pokemonImage = document.getElementById('pokemonImg');
+    pokemonImage.src = pokemonAPI['sprites']['other']['official-artwork']['front_default'];
+}
+
+
+function loadPokemonId() {
+    let pokemonNumber = pokemonAPI['id'];
+    let pokemonNumberContainer = document.getElementById('pokemonNumber');
+    pokemonNumberContainer.innerHTML = '';
+    pokemonNumberContainer.innerHTML += renderPokemonNumber(pokemonNumber);
 }
 
 
@@ -109,30 +121,32 @@ function renderBaseStats() {
     let stats = pokemonAPI['stats'];
     let abilities = document.getElementById('abilities');
 
-  abilities.innerHTML = ''; // Vorherige Fähigkeiten löschen
+    abilities.innerHTML = ''; // Vorherige Fähigkeiten löschen
 
   for (let i = 0; i < stats.length; i++) {
       let statsName = stats[i]['stat']['name'];
       let baseStat = stats[i]['base_stat'];
-
-      if (statsName === 'hp') {
-          statsName = 'HP';
-      } else if (statsName === 'special-attack') {
-          statsName = 'Sp. Attack';
-      } else if (statsName === 'special-defense') {
-          statsName = 'Sp. Defense';
-      }
+      ifBaseStats(statsName);
 
       statsName = statsName.charAt(0).toUpperCase() + statsName.slice(1);
-
       let progressBarClass = baseStat > 50 ? 'bg-success' : 'bg-danger';
-
       abilities.innerHTML += renderBaseStatsHTML(statsName, baseStat, progressBarClass);
   }
 }
 
 
-function renderAbout(pokemonName) {
+function ifBaseStats(statsName) {
+    if (statsName === 'hp') {
+        statsName = 'HP';
+    } else if (statsName === 'special-attack') {
+        statsName = 'Sp. Attack';
+    } else if (statsName === 'special-defense') {
+        statsName = 'Sp. Defense';
+    }
+}
+
+
+function renderAbout() {
     document.getElementById('abilities').classList.add('dNone');
     document.getElementById('moves').classList.add('dNone');
     
@@ -146,8 +160,6 @@ function renderAbout(pokemonName) {
     about.innerHTML = '';
     about.innerHTML = renderAboutHTML(pokemonName, height, weight, abilities1, abilities2);
 }
-
-
 
 
 function likeBtn(index) {
@@ -168,8 +180,6 @@ function goBack() {
 
 
 function playMusic() {
-    document.getElementById('overlayStartContainer').classList.remove('overlay');
-    document.getElementById('musicConfirmation').classList.add('dNone');
     if(audio.paused) {
         audio.play();
         audio.volume = 0.5;
@@ -265,6 +275,11 @@ function goRight(index) {
 }
 
 
+function scrollToTop() {
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  }
+
+
 function hiddenGoRight() {
     document.getElementById('goRight').classList.add('dNone');
 }
@@ -276,6 +291,12 @@ function hiddenGoLeft() {
 
 
 async function loadMore() {
+    if (loading) {
+        return; // Wenn bereits ein Ladevorgang läuft, wird die Funktion beendet
+    }
+
+    loading = true; // Setzen der Ladevariable auf "true", um anzuzeigen, dass ein Ladevorgang läuft
+
     amountsShowing += +50;
     let load = amountsShowing - 50;
 
@@ -289,5 +310,6 @@ async function loadMore() {
             await loadPokemon(i);
         }
     }
+    loading = false; // Setzen der Ladevariable auf "false", um anzuzeigen, dass der Ladevorgang abgeschlossen ist
 }
 

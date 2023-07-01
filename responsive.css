@@ -1,7 +1,30 @@
+@media(max-width: 1500px) {
+    .linkerPfeil {
+        top: 47%;
+    }
+    .rechterPfeil {
+        top: 47%;
+    }
+    .pokedexInfoArea {
+        top: 5%;
+    }
+    #pokemonImg {
+        height: 300px;
+        width: 300px;
+    }
+    #pokemonBackgroundImg {
+        transform: scale(1.2) !important;
+        top: 15%;
+    }
+}
+
 
 @media(max-width: 960px) {
 .musicConfirmation h3 {
     font-size: 24px !important;
+}
+.goUp {
+    right: 15%;
 }
 }
 
@@ -13,6 +36,9 @@
         font-size: 20px !important;
         flex-wrap: nowrap;
         min-width: 300px;
+    }
+    .goUp {
+        right: 5%;
     }
 }
 
@@ -30,6 +56,9 @@
     .linkerPfeil {
         left: 15px;
     }
+    .goUp {
+        right: 15%;
+    }
 }
 
 @media(max-width: 550px) {
@@ -43,12 +72,6 @@
     #pokemonImg {
         height: 320px;
         width: 320px;
-    }
-}
-
-@media(max-width: 500px) {
-    .info-container {
-        width: 480px;
     }
 }
 
@@ -93,6 +116,15 @@
     .linkerPfeil {
         left: 5px;
     }
+    .goUp {
+        right: 15%;
+    }
+}
+
+@media(min-width: 936px) {
+    .goUp {
+        display: none;
+    }
 }
 
 @media(max-width: 400px) {
@@ -133,6 +165,9 @@
     }
     .parent-container {
         top: -115px;
+    }
+    .goUp {
+        right: 8%;
     }
 }
 

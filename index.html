@@ -39,9 +39,10 @@
         <div id="cardsArea"></div>
         <div id="loadMoreBtn">
             <button onclick="loadMore()">load more</button>
+            <img onclick="scrollToTop()" class="goUp" src="./img/pfeil-nach-oben.png" alt="">
         </div>
 
-        <div id="overlay" class="dNone"></div>
+        <div onclick="goBack()" id="overlay" class="dNone"></div>
 
         <div id="pokedexInfoArea" class="pokedexInfoArea dNone">
             
@@ -81,16 +82,6 @@
                 <div id="about"></div>
                 <div id="abilities"></div>
                 <div id="moves"></div>
-            </div>
-        </div>
-
-        <div id="overlayStartContainer" class="overlay">
-            <div id="musicConfirmation" class="musicConfirmation">
-                <h3>Möchten Sie Musik abspielen?</h3>
-                <div class="buttonContainer">
-                <button onclick="playMusic()">Ja</button>
-                <button onclick="noneMusic()">Nein</button>
-                </div>
             </div>
         </div>
     </body>

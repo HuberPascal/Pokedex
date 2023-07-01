@@ -103,6 +103,7 @@ nav ul {
 ul li {
     margin-right: 20px;
     cursor: pointer;
+    z-index: 1;
 }
 
 .progressInfo {
@@ -349,6 +350,7 @@ ul li {
   display: flex;
   justify-content: center;
   margin: 16px;
+  position: relative;
 }
 
 #loadMoreBtn button {
@@ -375,6 +377,15 @@ background-color: #45a049;
 
 .fixed {
   position: fixed;
+}
+
+.goUp {
+  height: 44px;
+  width: 44px;
+  position:  absolute;
+  right: 5%;
+  margin: 8px;
+  cursor: pointer;
 }
   
   /*---------- Button visit Site ----------*/
