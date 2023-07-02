@@ -140,6 +140,12 @@ header {
     }
 }
 
+@media(min-width: 550px) {
+    #searchResponsive {
+        display: none;
+    }
+}
+
 @media(max-width: 500px) {
     .info-container {
         width: 430px;
