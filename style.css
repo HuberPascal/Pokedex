@@ -57,6 +57,27 @@ header img {
   cursor: pointer;
 }
 
+#loading-animation {
+  display: flex;
+  justify-content: center;
+  margin-top: 50px;
+}
+
+#loading-animation img {
+  animation: spin 1s infinite linear;
+  width: 150px;
+  height: 150px;
+}
+
+@keyframes spin {
+  0% {
+    transform: rotate(0);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
 #search {
   width: 300px;
   height: 40px;
@@ -294,7 +315,8 @@ ul li {
 }
 
 #cardsArea {
-    display: flex;
+    /* display: flex; */
+    display: none;
     justify-content: center;
     flex-wrap: wrap;
 }
@@ -413,7 +435,7 @@ ul li {
 }
 
 #loadMoreBtn {
-  display: flex;
+  display: none;
   justify-content: center;
   margin: 16px;
   position: relative;

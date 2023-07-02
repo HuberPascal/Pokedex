@@ -101,6 +101,22 @@ function goNextImg(index) {
   }
 
 
+  function renderAbout() {
+    document.getElementById('abilities').classList.add('dNone');
+    document.getElementById('moves').classList.add('dNone');
+    
+    let height = pokemonAPI['height'];
+    let weight = pokemonAPI['weight'];
+    weight = (weight / 10).toFixed(1);
+    let abilities1 = pokemonAPI['abilities'][0]['ability']['name'];
+    // überprüfen ob zwei "ability" vorhanden sind. links oder rechts wird ausgeführt
+    let abilities2 = pokemonAPI['abilities'][1] ? pokemonAPI['abilities'][1]['ability']['name'] : '';
+
+    about.innerHTML = '';
+    about.innerHTML = renderAboutHTML(pokemonName, height, weight, abilities1, abilities2);
+    }
+
+
   function renderPokemonAbilities(pokemonAPI) { 
     let pokedexInfoAbilities = document.getElementById('pokedexInfoAbilities');
     let types = pokemonAPI['types'][0]['type']['name'];
@@ -143,22 +159,6 @@ function ifBaseStats(statsName) {
     } else if (statsName === 'special-defense') {
         statsName = 'Sp. Defense';
     }
-}
-
-
-function renderAbout() {
-    document.getElementById('abilities').classList.add('dNone');
-    document.getElementById('moves').classList.add('dNone');
-    
-    let height = pokemonAPI['height'];
-    let weight = pokemonAPI['weight'];
-    weight = (weight / 10).toFixed(1);
-    let abilities1 = pokemonAPI['abilities'][0]['ability']['name'];
-    // überprüfen ob zwei "ability" vorhanden sind. links oder rechts wird ausgeführt
-    let abilities2 = pokemonAPI['abilities'][1] ? pokemonAPI['abilities'][1]['ability']['name'] : '';
-
-    about.innerHTML = '';
-    about.innerHTML = renderAboutHTML(pokemonName, height, weight, abilities1, abilities2);
 }
 
 
@@ -314,45 +314,22 @@ async function loadMore() {
 }
 
 
-  async function filter() {
-    let search = document.getElementById('search').value;
-    search = search.toLowerCase();
-    let list = document.getElementById('cardsArea');
-    // ifInputValueEmptyFirst(search);
-    if(search === '') {
-    } else {
-        filterInit = false;
-    }
-
-    if(filterInit) {
-        return;
-    }
-    filterInit = true;
-    list.innerHTML = '';
-
-    for (let i = 0; i < pokemon.length; i++) {
-        let name = pokemon[i];
-        if (name.toLowerCase().includes(search)) {
-            let indexOfSearch = pokemon.indexOf(name);
-            loadPokemon(indexOfSearch);
-        }
-    }
-    ifInputValueEmpty(search);
-}
-
-
-
 async function filter() {
     let search = document.getElementById('search').value;
     search = search.toLowerCase();
     let list = document.getElementById('cardsArea');
     ifInputFieldEmpty(search);
+ 
     if(filterInit) {
         return;
     }
     filterInit = true;
     list.innerHTML = '';
 
+
+    if(search === '') {
+        init();
+    } else {
     for(let i = 0; i < pokemon.length; i++) {
         let name = pokemon[i];
         if (name.toLowerCase().includes(search)) {
@@ -360,6 +337,7 @@ async function filter() {
             await loadPokemon(indexOfSearch);
         }
     }
+}
     ifInputValueEmpty(search);
 }
 
@@ -369,12 +347,16 @@ async function filterResponsive() {
     search = search.toLowerCase();
     let list = document.getElementById('cardsArea');
     ifInputFieldEmpty(search);
+ 
     if(filterInit) {
         return;
     }
     filterInit = true;
     list.innerHTML = '';
 
+    if(search === '') {
+        init();
+    } else {
     for(let i = 0; i < pokemon.length; i++) {
         let name = pokemon[i];
         if (name.toLowerCase().includes(search)) {
@@ -382,6 +364,7 @@ async function filterResponsive() {
             await loadPokemon(indexOfSearch);
         }
     }
+}
     ifInputValueEmpty(search);
 }
 
@@ -402,8 +385,6 @@ function ifInputValueEmpty(search) {
 }
 
 
-
-
 async function showInputField() {
     if (isInputFieldShown) { // damit Init() nicht mehrmals aufgerufen werden kann und neu geladen wird
         return; // Die Funktion wird beendet, wenn das Input-Feld bereits geöffnet ist
@@ -420,11 +401,22 @@ async function showInputField() {
         await init();
         isInputFieldShown = false; // Das Input-Feld wurde geschlossen, daher wird der Status auf "false" gesetzt
     } else {
-        InputField.innerHTML = `
-            <div>
-                <input placeholder="Pokemon suchen ..." id="searchResponsive" onkeyup="filterResponsive()" type="text">
-            </div>
-        `;
+        InputField.innerHTML = renderInputField();
         isInputFieldShown = false; // Das Input-Feld wurde geöffnet, daher wird der Status auf "true" gesetzt
     }
 }
+
+
+window.addEventListener('load', function() {
+    var loadingAnimation = document.getElementById('loading-animation');
+    var cardsArea = document.getElementById('cardsArea');
+    let loadMoreBtn = document.getElementById('loadMoreBtn')
+  
+    // Ladeanimation für 2.5 Sekunden anzeigen
+    setTimeout(function() {
+      loadingAnimation.style.display = 'none';
+      loadMoreBtn.style.display = 'flex';
+      cardsArea.style.display = 'flex';
+    }, 2500); // Dauer in Millisekunden
+  });
+  

@@ -123,6 +123,7 @@ function renderPokemonCardsWithSecondTyps(index, pokemonName, types, typesSecond
     `;
   }
   
+  
   function likeHearts(index) {
     return `
     <div class="pokedexHeadImg">
@@ -130,3 +131,43 @@ function renderPokemonCardsWithSecondTyps(index, pokemonName, types, typesSecond
     </div>
     `;
   }
+
+
+  function renderInputField() {
+    return `
+    <div>
+        <input placeholder="Pokemon suchen ..." id="searchResponsive" onkeyup="filterResponsive()" type="text">
+    </div>
+`;
+  }
+
+
+
+
+
+
+//   async function filter() {
+//     let search = document.getElementById('search').value;
+//     search = search.toLowerCase();
+//     let list = document.getElementById('cardsArea');
+//     // ifInputValueEmptyFirst(search);
+//     if(search === '') {
+//     } else {
+//         filterInit = false;
+//     }
+
+//     if(filterInit) {
+//         return;
+//     }
+//     filterInit = true;
+//     list.innerHTML = '';
+
+//     for (let i = 0; i < pokemon.length; i++) {
+//         let name = pokemon[i];
+//         if (name.toLowerCase().includes(search)) {
+//             let indexOfSearch = pokemon.indexOf(name);
+//             await loadPokemon(indexOfSearch);
+//         }
+//     }
+//     ifInputValueEmpty(search);
+// }
