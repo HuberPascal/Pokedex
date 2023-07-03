@@ -127,7 +127,7 @@ function renderPokemonCardsWithSecondTyps(index, pokemonName, types, typesSecond
   function likeHearts(index) {
     return `
     <div class="pokedexHeadImg">
-        <img onclick="likeBtn(${index})" id="likeBtn" src="./img/herz(3).png" alt="">
+        <img onclick="likeBtn(${index})" id="likeBtn${index}" src="./img/herz(3).png" alt="">
     </div>
     `;
   }
@@ -140,34 +140,3 @@ function renderPokemonCardsWithSecondTyps(index, pokemonName, types, typesSecond
     </div>
 `;
   }
-
-
-
-
-
-
-//   async function filter() {
-//     let search = document.getElementById('search').value;
-//     search = search.toLowerCase();
-//     let list = document.getElementById('cardsArea');
-//     // ifInputValueEmptyFirst(search);
-//     if(search === '') {
-//     } else {
-//         filterInit = false;
-//     }
-
-//     if(filterInit) {
-//         return;
-//     }
-//     filterInit = true;
-//     list.innerHTML = '';
-
-//     for (let i = 0; i < pokemon.length; i++) {
-//         let name = pokemon[i];
-//         if (name.toLowerCase().includes(search)) {
-//             let indexOfSearch = pokemon.indexOf(name);
-//             await loadPokemon(indexOfSearch);
-//         }
-//     }
-//     ifInputValueEmpty(search);
-// }

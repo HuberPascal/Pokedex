@@ -30,6 +30,7 @@
         <header>
             <div class="header-container">
                 <img id="animateImage" class="cursor" onclick="playMusic()" src="./img/lautsprecher(2).png" alt="">
+                <div id="songName" class="songName dNone">Pokémon Song</div>
             </div>
             <div class="header-container flex-center">
                 <img class="pokedexLogo" src="./img/logo.png" alt="">
@@ -63,9 +64,7 @@
             <div id="pokedex">
                 <div class="pokedexHeadImg">
                     <img onclick="goBack()" src="./img/pfeil(white).png" alt="">
-                    <div id="likeHeart">
-                        <!-- <img onclick="likeBtn()" id="likeBtn" src="./img/herz(3).png" alt=""> -->
-                    </div>
+                    <div id="likeHeart"></div>
                 </div>
                 <h3 id="pokemonName"></h3>
                 <div id="pokedexInfoAbilities"></div>
@@ -84,9 +83,9 @@
 
                 <nav>
                     <ul>
-                        <li onclick="showAbout()">About</li>
-                        <li onclick="showBaseStats()">Base Stats</li>
-                        <li onclick="showMoves()">Moves</li>
+                        <li class="padding active" id="activeAbout" onclick="showAbout()">About</li>
+                        <li class="padding active" id="activeBaseState" onclick="showBaseStats()">Base Stats</li>
+                        <li class="padding active" id="activeMoves" onclick="showMoves()">Moves</li>
                     </ul>
                 </nav>
 

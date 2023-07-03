@@ -11,4 +11,5 @@ let isInputFieldShown = false;
 let filterInit = false;
 let number = 0;
 let amountsShowing = 51;
+let heartStates = {}; // Objekt zum Speichern der Zustände der Herzen
 let audio = new Audio('./audio/Pokémon-Theme-Song.m4a');

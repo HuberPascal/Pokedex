@@ -24,6 +24,7 @@
     }
     .header-container {
         width: 200px;
+        font-size: 19px;
     }
     #search {
         width: 200px;
@@ -64,6 +65,9 @@ header {
 #search {
     width: 150px;
     font-size: 14px;
+}
+.songName {
+    display: none;
 }
 }
 
@@ -165,6 +169,9 @@ header {
     .linkerPfeil {
         left: 5px;
         height: 45px;
+    }
+    ul li {
+        margin-right: 0;
     }
 }
 

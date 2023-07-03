@@ -1,10 +1,11 @@
 
 body {
     margin: 0;
-    font-family: 'Roboto' !important;
+    /* font-family: 'Roboto' !important; */
     display: flex;
     justify-content: center;
     flex-direction: column;
+    font-family: 'Maven Pro', sans-serif !important;
 }
 
 h1 {
@@ -40,7 +41,15 @@ header img {
 
 .header-container {
   width: 300px;
+    display: flex;
+    color: white;
+    font-size: 20px;
+    align-items: center;
 }
+
+ .songName {
+  margin-left: 20px;
+ }
 
 .wrapper {
   position: fixed;
@@ -183,8 +192,7 @@ nav ul {
     display: flex;
     gap: 24px;
     list-style: none;
-    padding: 12px 0;
-    margin: 0;
+    margin: -2px;
 }
 
 ul li {
@@ -193,9 +201,20 @@ ul li {
     z-index: 1;
 }
 
+.active {
+  border-bottom: 2px solid black;
+}
+
+.padding {
+  padding: 0 4px 3px 4px;
+}
+
+.padding:hover {
+  border-bottom: 2px solid black;
+}
+
 .progressInfo {
     width: 300px;
-    
 }
 
 .progress {

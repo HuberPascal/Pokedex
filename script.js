@@ -38,9 +38,10 @@ function loadPokemonCards(index, currentPokemon) {   // "i" ist ab jetzt "index"
 async function renderPokemonInfo(index) {  // index = Zahl eines Pokemons. Damit immer die richtigen Daten geladen werden
     showPokemonInfoCard();
     loadPokemonName(index);
+    
   
-    let pokemonKlein = pokemon[index];
-    let url = `https://pokeapi.co/api/v2/pokemon/${pokemonKlein}`;
+    let pokemonInfoCardImg = pokemon[index];
+    let url = `https://pokeapi.co/api/v2/pokemon/${pokemonInfoCardImg}`;
     let response = await fetch(url);
     pokemonAPI = await response.json();
     loadPokemonImgFromApi();
@@ -48,6 +49,7 @@ async function renderPokemonInfo(index) {  // index = Zahl eines Pokemons. Damit
 
     let likeHeart = document.getElementById('likeHeart');
     likeHeart.innerHTML = likeHearts(index);
+    showLikeBtn(index); // Wenn das Pokemon geliket wurde, wir das rote Herz wieder eingefügt
 
     renderPokemonAbilities(pokemonAPI);
     renderAbout();
@@ -98,10 +100,10 @@ function goNextImg(index) {
       goNextImgHTML += imgGoRight(index);
     } 
     goNextImg.innerHTML = goNextImgHTML;
-  }
+}
 
 
-  function renderAbout() {
+function renderAbout() {
     document.getElementById('abilities').classList.add('dNone');
     document.getElementById('moves').classList.add('dNone');
     
@@ -114,10 +116,10 @@ function goNextImg(index) {
 
     about.innerHTML = '';
     about.innerHTML = renderAboutHTML(pokemonName, height, weight, abilities1, abilities2);
-    }
+}
 
 
-  function renderPokemonAbilities(pokemonAPI) { 
+function renderPokemonAbilities(pokemonAPI) { 
     let pokedexInfoAbilities = document.getElementById('pokedexInfoAbilities');
     let types = pokemonAPI['types'][0]['type']['name'];
     document.getElementById('pokedex').classList = '';
@@ -129,7 +131,7 @@ function goNextImg(index) {
         pokedexInfoAbilities.innerHTML += renderFirstAndSecondTypsInfoCard(types, typesSecond);
     } else {
         pokedexInfoAbilities.innerHTML += renderOnlyFirstTypInfoCard(types);
-}
+    }
 }
 
 
@@ -163,11 +165,27 @@ function ifBaseStats(statsName) {
 
 
 function likeBtn(index) {
-    let likeBtn = document.getElementById('likeBtn').src;
-    if(likeBtn.indexOf('img/herz(3).png') != -1) {
-        document.getElementById('likeBtn').src = 'img/herz(4).png';
+    let likeBtnElement = document.getElementById(`likeBtn${index}`);
+    let likeBtnSrc = likeBtnElement.src;
+    
+    if (likeBtnSrc.indexOf('img/herz(3).png') !== -1) {
+        likeBtnElement.src = 'img/herz(4).png';
+        heartStates[index] = true; // Zustand auf "geliked" setzen
     } else {
-        document.getElementById('likeBtn').src = 'img/herz(3).png';
+        likeBtnElement.src = 'img/herz(3).png';
+        heartStates[index] = false; // Zustand auf "nicht geliked" setzen
+    }
+}
+
+
+function showLikeBtn(index) {
+    let likeBtnElement = document.getElementById(`likeBtn${index}`);
+    likeBtnElement.style.display = 'block'; // Element anzeigen
+
+    if (heartStates[index]) {
+        likeBtnElement.src = 'img/herz(4).png';
+    } else {
+        likeBtnElement.src = 'img/herz(3).png';
     }
 }
 
@@ -182,11 +200,13 @@ function goBack() {
 function playMusic() {
     if(audio.paused) {
         audio.play();
-        audio.volume = 0.5;
+        audio.volume = 0.05;
         startAnimateImage();
+        document.getElementById('songName').classList.remove('dNone');
     } else {
         audio.pause();
         stopAnimateImage();
+        document.getElementById('songName').classList.add('dNone');
     }
 }
 
@@ -226,6 +246,9 @@ function showAbout() {
     document.getElementById('moves').classList.add('dNone');
     let about = document.getElementById('about');
     about.classList.remove('dNone');
+    document.getElementById('activeAbout').classList.add('active');
+    document.getElementById('activeBaseState').classList.remove('active');
+    document.getElementById('activeMoves').classList.remove('active');
 }
 
 
@@ -234,6 +257,9 @@ function showBaseStats() {
     document.getElementById('moves').classList.add('dNone');
     let baseStats = document.getElementById('abilities');
     baseStats.classList.remove('dNone');
+    document.getElementById('activeBaseState').classList.add('active');
+    document.getElementById('activeAbout').classList.remove('active');
+    document.getElementById('activeMoves').classList.remove('active');
 }
 
 
@@ -242,6 +268,9 @@ function showMoves() {
     document.getElementById('abilities').classList.add('dNone');
     let moves = document.getElementById('moves');
     moves.classList.remove('dNone');
+    document.getElementById('activeMoves').classList.add('active');
+    document.getElementById('activeAbout').classList.remove('active');
+    document.getElementById('activeBaseState').classList.remove('active');
 }
 
 
