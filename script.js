@@ -175,6 +175,7 @@ function likeBtn(index) {
         likeBtnElement.src = 'img/herz(3).png';
         heartStates[index] = false; // Zustand auf "nicht geliked" setzen
     }
+    save();
 }
 
 
@@ -194,6 +195,17 @@ function goBack() {
     document.getElementById('pokedexInfoArea').classList.add('dNone');
     document.getElementById('overlay').classList.add('dNone');
     document.body.classList.remove('fixed');
+}
+
+
+function save() {
+    localStorage.setItem('heartStates', JSON.stringify(heartStates));
+}
+
+
+function load() {
+    let heartStatesLocalStorage = localStorage.getItem('heartStates');
+    heartStates = JSON.parse(heartStatesLocalStorage);
 }
 
 
@@ -448,4 +460,3 @@ window.addEventListener('load', function() {
       cardsArea.style.display = 'flex';
     }, 2500); // Dauer in Millisekunden
   });
-  
