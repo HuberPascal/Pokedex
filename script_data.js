@@ -9,6 +9,8 @@ let pokemonName;
 let loading = false; // Variable zum Überprüfen, ob bereits ein Ladevorgang ausgeführt wird
 let isInputFieldShown = false;
 let filterInit = false;
+let finishPokemonLoad = false;
+let inputEmpty = false;
 let number = 0;
 let amountsShowing = 51;
 let heartStates = {}; // Objekt zum Speichern der Zustände der Herzen

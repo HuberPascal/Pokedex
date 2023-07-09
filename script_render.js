@@ -136,7 +136,7 @@ function renderPokemonCardsWithSecondTyps(index, pokemonName, types, typesSecond
   function renderInputField() {
     return `
     <div>
-        <input placeholder="Pokemon suchen ..." id="searchResponsive" onkeyup="filterResponsive()" type="text">
+        <input placeholder="Pokemon suchen ..." id="searchResponsive" onkeyup="enterResponsive(event)" type="text">
     </div>
 `;
   }

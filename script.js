@@ -356,47 +356,13 @@ async function loadMore() {
 }
 
 
-function getPokemomFromInput() {
-    let searchValue = document.getElementById('search').value;
-    let search = searchValue.trim();
-    return search;
-}
 
 
-function enter(event) {
-    if (event.keyCode === 13) {
-        setCardsArea();
-        document.getElementById('loadMoreBtn').classList.add('dNone');
-    }
-}
 
-function setCardsArea() {
-    let searchInput = getPokemomFromInput();
-    let search = searchInput.toLowerCase();
-
-    if(search === '') {
-        // let loadMoreBtn = document.getElementById('loadMoreBtn');
-        // loadMoreBtn.classList.remove('dNone');
-        document.getElementById('cardsArea').innerHTML = '';
-        init();
-        return;
-    }
-
-    document.getElementById('cardsArea').innerHTML = '';
-    filter(search);
-}
-
-
-function filter(search) {
-
-    for (let i = 0; i < pokemon.length; i++) {
-        let searchedname = pokemon[i];
-        if (searchedname.toLowerCase().includes(search)) {
-            loadPokemon(i);
-        }
-    }
-}
-
+// async function filterResponsive() {
+//     let search = document.getElementById('searchResponsive').value;
+//     search = search.toLowerCase();
+//     let list = document.getElementById('cardsArea');
 //     ifInputFieldEmpty(search);
  
 //     if(filterInit) {
@@ -404,7 +370,6 @@ function filter(search) {
 //     }
 //     filterInit = true;
 //     list.innerHTML = '';
-
 
 //     if(search === '') {
 //         init();
@@ -421,47 +386,20 @@ function filter(search) {
 // }
 
 
-async function filterResponsive() {
-    let search = document.getElementById('searchResponsive').value;
-    search = search.toLowerCase();
-    let list = document.getElementById('cardsArea');
-    ifInputFieldEmpty(search);
- 
-    if(filterInit) {
-        return;
-    }
-    filterInit = true;
-    list.innerHTML = '';
+// function ifInputFieldEmpty(search) {
+//     if(search === '') {
+//     } else {
+//         filterInit = false;
+//     }
+// }
 
-    if(search === '') {
-        init();
-    } else {
-    for(let i = 0; i < pokemon.length; i++) {
-        let name = pokemon[i];
-        if (name.toLowerCase().includes(search)) {
-            let indexOfSearch = pokemon.indexOf(name);
-            await loadPokemon(indexOfSearch);
-        }
-    }
-}
-    ifInputValueEmpty(search);
-}
-
-
-function ifInputFieldEmpty(search) {
-    if(search === '') {
-    } else {
-        filterInit = false;
-    }
-}
-
-function ifInputValueEmpty(search) {
-    if(search === '') {
-        filterInit = true;
-    } else {
-        filterInit = false;
-    }
-}
+// function ifInputValueEmpty(search) {
+//     if(search === '') {
+//         filterInit = true;
+//     } else {
+//         filterInit = false;
+//     }
+// }
 
 
 async function showInputField() {
