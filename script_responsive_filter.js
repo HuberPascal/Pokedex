@@ -18,17 +18,22 @@ function enterResponsive(event) {
 
     if (event.keyCode === 13) {
   
-      if (search === '') {
-        document.getElementById('cardsArea').innerHTML = '';
-        init();
-        document.getElementById('loadMoreBtn').classList.remove('dNone');
-        inputEmpty = true;
-        return;
-      }
+        if (search === '') {
+            inputIsEmpty();
+            return;
+          }
         setCardsArea(search);
         document.getElementById('loadMoreBtn').classList.add('dNone');
     }
-  }
+}
+
+
+function inputIsEmpty() {
+    document.getElementById('cardsArea').innerHTML = '';
+    document.getElementById('loadMoreBtn').classList.remove('dNone');
+    inputEmpty = true;
+    init();
+}
 
 
   function setCardsArea(search) {

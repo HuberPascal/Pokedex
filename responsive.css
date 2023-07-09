@@ -261,7 +261,6 @@ header {
     }
 }
 
-
 @media(max-width: 390px) {
     #pokemonBackgroundImg {
         left: 60px;

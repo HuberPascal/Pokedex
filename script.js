@@ -32,7 +32,7 @@ function loadPokemonCards(index, currentPokemon) {   // "i" ist ab jetzt "index"
     } else {
         cardsArea.innerHTML += renderPokemonCardsWithOneTyp(index, pokemonName, types, pokemonImageSrc);
     }
-  }
+}
   
 
 async function renderPokemonInfo(index) {  // index = Zahl eines Pokemons. Damit immer die richtigen Daten geladen werden
@@ -110,7 +110,7 @@ function renderAbout() {
     let weight = pokemonAPI['weight'];
     weight = (weight / 10).toFixed(1);
     let abilities1 = pokemonAPI['abilities'][0]['ability']['name'];
-    // überprüfen ob zwei "ability" vorhanden sind. links oder rechts wird ausgeführt
+    // überprüfen ob zwei "ability" vorhanden sind. Links oder Rechts wird ausgeführt
     let abilities2 = pokemonAPI['abilities'][1] ? pokemonAPI['abilities'][1]['ability']['name'] : '';
 
     about.innerHTML = '';
@@ -143,7 +143,7 @@ function renderBaseStats() {
   for (let i = 0; i < stats.length; i++) {
       let statsName = stats[i]['stat']['name'];
       let baseStat = stats[i]['base_stat'];
-      ifBaseStats(statsName);
+      statsName = ifBaseStats(statsName);
 
       statsName = statsName.charAt(0).toUpperCase() + statsName.slice(1);
       let progressBarClass = baseStat > 50 ? 'bg-success' : 'bg-danger';
@@ -160,6 +160,8 @@ function ifBaseStats(statsName) {
     } else if (statsName === 'special-defense') {
         statsName = 'Sp. Defense';
     }
+
+    return statsName;
 }
 
 
@@ -354,52 +356,6 @@ async function loadMore() {
     }
     loading = false; // Setzen der Ladevariable auf "false", um anzuzeigen, dass der Ladevorgang abgeschlossen ist
 }
-
-
-
-
-
-// async function filterResponsive() {
-//     let search = document.getElementById('searchResponsive').value;
-//     search = search.toLowerCase();
-//     let list = document.getElementById('cardsArea');
-//     ifInputFieldEmpty(search);
- 
-//     if(filterInit) {
-//         return;
-//     }
-//     filterInit = true;
-//     list.innerHTML = '';
-
-//     if(search === '') {
-//         init();
-//     } else {
-//     for(let i = 0; i < pokemon.length; i++) {
-//         let name = pokemon[i];
-//         if (name.toLowerCase().includes(search)) {
-//             let indexOfSearch = pokemon.indexOf(name);
-//             await loadPokemon(indexOfSearch);
-//         }
-//     }
-// }
-//     ifInputValueEmpty(search);
-// }
-
-
-// function ifInputFieldEmpty(search) {
-//     if(search === '') {
-//     } else {
-//         filterInit = false;
-//     }
-// }
-
-// function ifInputValueEmpty(search) {
-//     if(search === '') {
-//         filterInit = true;
-//     } else {
-//         filterInit = false;
-//     }
-// }
 
 
 async function showInputField() {

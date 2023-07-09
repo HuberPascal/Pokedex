@@ -1,11 +1,10 @@
 
 body {
     margin: 0;
-    /* font-family: 'Roboto' !important; */
+    font-family: 'Maven Pro', sans-serif !important;
     display: flex;
     justify-content: center;
     flex-direction: column;
-    font-family: 'Maven Pro', sans-serif !important;
 }
 
 h1 {
@@ -136,7 +135,6 @@ header img {
   width: 30px;
 }
 
-
 .pokedexLogo {
   height: 100px;
   width: 200px;
@@ -234,7 +232,6 @@ ul li {
 .flex p {
     margin: 4px;
     width: 140px;
-    /* color: rgba(0, 0, 0, 0.5); */ 
 }
 
 .flex span {
@@ -334,7 +331,6 @@ ul li {
 }
 
 #cardsArea {
-    /* display: flex; */
     display: none;
     justify-content: center;
     flex-wrap: wrap;
