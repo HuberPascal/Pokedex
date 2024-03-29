@@ -1,9 +1,20 @@
+let pokemonData = []; // Pokemon-Daten in der richtigen Reihenfolge sammeln
+
 async function init() {
   const promises = [];
+
   for (let i = 0; i < amountsShowing; i++) {
-    promises.push(loadPokemon(i)); // lädt alle Pokemon gleichzeitig um Wartezeiten zu vermeiden
+    promises.push(loadPokemon(i));
   }
+
+  // Warten, bis alle Pokemon geladen sind
   await Promise.all(promises);
+
+  // Anzeigen der Pokemon-Karten in der richtigen Reihenfolge
+  for (let i = 0; i < amountsShowing; i++) {
+    loadPokemonCards(i, pokemonData[i]);
+  }
+
   hideLoadingAnimation();
 }
 
@@ -12,8 +23,10 @@ async function loadPokemon(i) {
 
   let url = `https://pokeapi.co/api/v2/pokemon/${pokemonName}`;
   let response = await fetch(url);
-  currentPokemon = await response.json();
-  loadPokemonCards(i, currentPokemon);
+  let currentPokemon = await response.json();
+
+  // Pokemon-Daten in das Array einfügen, damit die Reihenfolge beibehalten wird
+  pokemonData[i] = currentPokemon;
 }
 
 //////////// render Funktion Startseite
@@ -336,28 +349,60 @@ function hiddenGoLeft() {
 }
 
 async function loadMore() {
+  loadPokeballAnimation();
   if (loading) {
     return; // Wenn bereits ein Ladevorgang läuft, wird die Funktion beendet
   }
 
-  loading = true; // Setzen der Ladevariable auf "true", um anzuzeigen, dass ein Ladevorgang läuft
+  loading = true;
 
-  amountsShowing += +50;
-  let load = amountsShowing - 50;
+  let load = amountsShowing;
+
+  amountsShowing += 50;
 
   if (amountsShowing >= 151) {
     document.getElementById("loadMoreBtn").classList.add("dNone");
-    for (let i = load; i < amountsShowing; i++) {
-      await loadPokemon(i);
+  }
+
+  await loadNewPokemon(load, amountsShowing);
+
+  loading = false;
+}
+
+async function loadNewPokemon(startIndex, endIndex) {
+  const promises = [];
+  // Überprüfen, ob die Menge der angezeigten Pokemon den Schwellenwert überschreitet
+  for (let i = startIndex; i < endIndex && i < pokemon.length; i++) {
+    // Nur die Pokémon laden, die noch nicht im pokemonData Array vorhanden sind
+    if (!pokemonData[i]) {
+      promises.push(loadPokemon(i));
     }
   }
 
-  const promises = [];
-  for (let i = load; i < amountsShowing; i++) {
-    promises.push(loadPokemon(i));
-  }
+  // Warten, bis alle neuen Pokemon geladen sind
+  await Promise.all(promises);
 
-  loading = false; // Setzen der Ladevariable auf "false", um anzuzeigen, dass der Ladevorgang abgeschlossen ist
+  // Anzeigen der neuen Pokemon-Karten
+  for (let i = startIndex; i < endIndex && i < pokemon.length; i++) {
+    loadPokemonCards(i, pokemonData[i]);
+  }
+  stopPokeballAnimation();
+}
+
+function loadPokeballAnimation() {
+  let loadingAnimation = document.getElementById("loading-animation-load-more");
+  let LoadMoreBtn = document.getElementById("loadMoreBtn");
+
+  loadingAnimation.style.display = "flex";
+  LoadMoreBtn.style.display = "none";
+}
+
+function stopPokeballAnimation() {
+  let loadingAnimation = document.getElementById("loading-animation-load-more");
+  let LoadMoreBtn = document.getElementById("loadMoreBtn");
+
+  loadingAnimation.style.display = "none";
+  LoadMoreBtn.style.display = "flex";
 }
 
 async function showInputField() {
@@ -385,11 +430,11 @@ async function showInputField() {
 window.addEventListener("load", init);
 
 function hideLoadingAnimation() {
-  var loadingAnimation = document.getElementById("loading-animation");
-  var cardsArea = document.getElementById("cardsArea");
-  var loadMoreBtn = document.getElementById("loadMoreBtn");
+  let loadingAnimation = document.getElementById("loading-animation");
+  let cardsArea = document.getElementById("cardsArea");
+  let loadMoreBtnContainer = document.getElementById("loadMoreBtnContainer");
 
   loadingAnimation.style.display = "none";
-  loadMoreBtn.style.display = "flex";
+  loadMoreBtnContainer.style.display = "flex";
   cardsArea.style.display = "flex";
 }
