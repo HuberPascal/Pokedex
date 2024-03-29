@@ -363,7 +363,7 @@ async function loadMore() {
 async function showInputField() {
   if (isInputFieldShown) {
     // damit Init() nicht mehrmals aufgerufen werden kann und neu geladen wird
-    return; // Die Funktion wird beendet, wenn das Input-Feld bereits geöffnet ist
+    return; // Die Funktion wird beendet, wenn das Input-Feld bereits geöffnet  ist
   }
 
   isInputFieldShown = true;
