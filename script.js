@@ -12,7 +12,7 @@ async function init() {
 
   // Anzeigen der Pokemon-Karten in der richtigen Reihenfolge
   for (let i = 0; i < amountsShowing; i++) {
-    loadPokemonCards(i, pokemonData[i]);
+    loadPokemonCards(i, pokemonData[i], "cardsArea");
   }
 
   hideLoadingAnimation();
@@ -30,9 +30,9 @@ async function loadPokemon(i) {
 }
 
 //////////// render Funktion Startseite
-function loadPokemonCards(index, currentPokemon) {
+function loadPokemonCards(index, currentPokemon, container) {
   // "i" ist ab jetzt "index". "i" hat immer den Wert eines Pokemons
-  let cardsArea = document.getElementById("cardsArea");
+  let cardsArea = document.getElementById(`${container}`);
   let pokemonName = pokemon[index];
   pokemonName = pokemonName.charAt(0).toUpperCase() + pokemonName.slice(1);
   let pokemonImageSrc =
@@ -384,14 +384,14 @@ async function loadNewPokemon(startIndex, endIndex) {
 
   // Anzeigen der neuen Pokemon-Karten
   for (let i = startIndex; i < endIndex && i < pokemon.length; i++) {
-    loadPokemonCards(i, pokemonData[i]);
+    loadPokemonCards(i, pokemonData[i], "cardsArea");
   }
   stopPokeballAnimation();
 }
 
 function loadPokeballAnimation() {
   let loadingAnimation = document.getElementById("loading-animation-load-more");
-  let LoadMoreBtn = document.getElementById("loadMoreBtn");
+  let LoadMoreBtn = document.getElementById("loadMoreBtnContainer");
 
   loadingAnimation.style.display = "flex";
   LoadMoreBtn.style.display = "none";
@@ -399,27 +399,26 @@ function loadPokeballAnimation() {
 
 function stopPokeballAnimation() {
   let loadingAnimation = document.getElementById("loading-animation-load-more");
-  let LoadMoreBtn = document.getElementById("loadMoreBtn");
+  let LoadMoreBtn = document.getElementById("loadMoreBtnContainer");
 
   loadingAnimation.style.display = "none";
   LoadMoreBtn.style.display = "flex";
 }
 
 async function showInputField() {
-  if (isInputFieldShown) {
-    // damit Init() nicht mehrmals aufgerufen werden kann und neu geladen wird
-    return; // Die Funktion wird beendet, wenn das Input-Feld bereits geöffnet  ist
-  }
-
   isInputFieldShown = true;
   let searchResponsive = document.getElementById("searchResponsive");
   let InputField = document.getElementById("inputField");
   let cardsArea = document.getElementById("cardsArea");
+  let filteredCardsArea = document.getElementById("filteredCardsArea");
+  let loadMoreBtnContainer = document.getElementById("loadMoreBtnContainer");
 
   if (searchResponsive) {
     InputField.innerHTML = "";
-    cardsArea.innerHTML = "";
-    await init();
+    cardsArea.style.display = "flex";
+    filteredCardsArea.style.display = "none";
+    loadMoreBtnContainer.classList.remove("dNone");
+
     isInputFieldShown = false; // Das Input-Feld wurde geschlossen, daher wird der Status auf "false" gesetzt
   } else {
     InputField.innerHTML = renderInputField();
@@ -427,7 +426,7 @@ async function showInputField() {
   }
 }
 
-window.addEventListener("load", init);
+// window.addEventListener("load", init);
 
 function hideLoadingAnimation() {
   let loadingAnimation = document.getElementById("loading-animation");

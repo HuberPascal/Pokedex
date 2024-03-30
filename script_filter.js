@@ -1,48 +1,38 @@
-function getPokemomFromInput() {
-  let searchValue = document.getElementById("search").value;
-  let search = searchValue.trim();
-  return search;
-}
-
 function enter(event) {
   let searchInput = getPokemomFromInput();
-  let search = searchInput.toLowerCase();
-  if (search > "") {
-    inputEmpty = false;
-  }
-  if (inputEmpty) {
-    return;
-  }
+  let cardsArea = document.getElementById("cardsArea");
+  let filteredCardsArea = document.getElementById("filteredCardsArea");
+  let loadMoreBtn = document.getElementById("loadMoreBtnContainer");
+  filteredCardsArea.innerHTML = "";
 
-  if (event.keyCode === 13) {
-    if (search === "") {
-      inputIsEmpty();
-      return;
-    }
-    setCardsArea(search);
-    document.getElementById("loadMoreBtnContainer").classList.add("dNone");
+  filterPokemons(searchInput, loadMoreBtn, cardsArea, filteredCardsArea);
+}
+
+function filterPokemons(
+  searchInput,
+  loadMoreBtn,
+  cardsArea,
+  filteredCardsArea
+) {
+  if (searchInput !== "") {
+    loadMoreBtn.classList.add("dNone");
+    cardsArea.style.display = "none";
+    filteredCardsArea.style.display = "flex";
+
+    pokemonData.forEach((pokemon, index) => {
+      if (pokemon.name.toLowerCase().includes(searchInput)) {
+        loadPokemonCards(index, pokemonData[index], "filteredCardsArea");
+      }
+    });
+  } else {
+    loadMoreBtn.classList.remove("dNone");
+    cardsArea.style.display = "flex";
+    filteredCardsArea.style.display = "none";
   }
 }
 
-function inputIsEmpty() {
-  document.getElementById("cardsArea").innerHTML = "";
-  document.getElementById("loadMoreBtnContainer").classList.remove("dNone");
-  inputEmpty = true;
-  init();
-}
-
-function setCardsArea(search) {
-  document.getElementById("cardsArea").innerHTML = "";
-  filter(search);
-}
-
-function filter(search) {
-  // pokemonData-Array durchlaufen, um die Suchkriterien zu überprüfen
-  for (let i = 0; i < pokemonData.length; i++) {
-    let pokemonName = pokemonData[i].name;
-
-    if (pokemonName.toLowerCase().includes(search.toLowerCase())) {
-      loadPokemonCards(i, pokemonData[i]);
-    }
-  }
+function getPokemomFromInput() {
+  let searchValue = document.getElementById("search").value;
+  let search = searchValue.trim().toLowerCase();
+  return search;
 }

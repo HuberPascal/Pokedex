@@ -363,6 +363,16 @@ ul li {
   box-sizing: border-box;
 }
 
+#filteredCardsArea {
+  display: none;
+  justify-content: center;
+  flex-wrap: wrap;
+  max-width: 1912px;
+  margin: 0 auto;
+  padding: 0 20px;
+  box-sizing: border-box;
+}
+
 .dNone {
   display: none !important;
 }
@@ -480,6 +490,7 @@ ul li {
   justify-content: center;
   margin: 16px;
   position: relative;
+  height: 60px;
 }
 
 #loadMoreBtnContainer button {
@@ -643,4 +654,8 @@ ul li {
 
 .dragon {
   background: linear-gradient(to bottom right, #afa0f6, #7c63e7);
+}
+
+.active {
+  display: none;
 }
