@@ -92,6 +92,7 @@ header img {
   display: none;
   justify-content: center;
   margin-top: 50px;
+  margin-bottom: 50px;
 }
 
 #loading-animation-load-more img {
@@ -654,8 +655,4 @@ ul li {
 
 .dragon {
   background: linear-gradient(to bottom right, #afa0f6, #7c63e7);
-}
-
-.active {
-  display: none;
 }
